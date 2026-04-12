@@ -1,6 +1,5 @@
-"use client";
-
 import { Scissors } from "lucide-react";
+import Link from "next/link";
 
 export default function HeroText() {
   return (
@@ -28,7 +27,9 @@ export default function HeroText() {
 
         {/* Primary — Prenota ora: sfondo bianco pieno */}
         <a
-          href="/prenota"
+          href="https://www.my-booking-app.com/booking/home/qO4wj8s1I6j8FYokIK91eNNQc14BwwiC?iso=it"
+          target="_blank"
+          rel="noopener noreferrer"
           className="
             group relative inline-flex items-center
             px-8 py-4 rounded-full
@@ -58,7 +59,7 @@ export default function HeroText() {
         </a>
 
         {/* Secondary — Scopri i servizi: bordo bianco + backdrop blur */}
-        <a
+        <Link
           href="/servizi"
           className="
             group relative inline-flex items-center gap-2
@@ -80,7 +81,7 @@ export default function HeroText() {
             transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]
             group-hover:translate-x-1
           ">→</span>
-        </a>
+        </Link>
 
       </div>
     </div>

@@ -3,6 +3,7 @@ import { Syne, Anonymous_Pro } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "./components/SmoothScroll";
 import CustomCursor from "./components/CustomCursor";
+import Preloader from "./components/Preloader";
 
 const anonymousPro = Anonymous_Pro({
   variable: "--font-anonymous-pro",
@@ -106,6 +107,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <SmoothScroll>
+          <Preloader />
           <CustomCursor />
           {children}
         </SmoothScroll>

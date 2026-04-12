@@ -8,8 +8,13 @@ export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
 
     useEffect(() => {
-        // Delay per l'animazione d'ingresso
-        const timer = setTimeout(() => setMounted(true), 50);
+        // Attende che il preloader sia finito prima di triggerare l'animazione d'ingresso
+        const checkPreloader = setInterval(() => {
+            if (!document.body.classList.contains("preloader-active")) {
+                setMounted(true);
+                clearInterval(checkPreloader);
+            }
+        }, 100);
 
         // Tracking dello scorrimento per rendere la navbar 'fixed e glass'
         const handleScroll = () => {
@@ -19,7 +24,7 @@ export default function Navbar() {
         window.addEventListener("scroll", handleScroll);
 
         return () => {
-            clearTimeout(timer);
+            clearInterval(checkPreloader);
             window.removeEventListener("scroll", handleScroll);
         };
     }, []);

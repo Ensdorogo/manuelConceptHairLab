@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
+import { motion, useInView, useMotionValue, useTransform, animate } from "framer-motion";
 
 /* ── Hook: IntersectionObserver scroll reveal ── */
 function useScrollReveal(ref: React.RefObject<HTMLElement | null>) {
@@ -28,49 +29,26 @@ function useScrollReveal(ref: React.RefObject<HTMLElement | null>) {
     }, [ref]);
 }
 
-/* ── Hook: Animated number count-up ── */
-function useCountUp(
-    ref: React.RefObject<HTMLSpanElement | null>,
-    target: number,
-    suffix = ""
-) {
+/* ── Componente: Animated Counter via Framer Motion ── */
+function AnimatedCounter({ target, suffix = "", className }: { target: number; suffix?: string; className?: string }) {
+    const ref = useRef<HTMLSpanElement>(null);
+    const inView = useInView(ref, { once: true, margin: "-50px" });
+    const count = useMotionValue(0);
+    const rounded = useTransform(count, (latest) => Math.floor(latest) + suffix);
+
     useEffect(() => {
-        const el = ref.current;
-        if (!el) return;
+        if (inView) {
+            animate(count, target, { duration: 1.6, ease: "easeOut" });
+        }
+    }, [inView, count, target]);
 
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                if (!entry.isIntersecting) return;
-                observer.disconnect();
-
-                const duration = 1600;
-                const startTime = performance.now();
-
-                const tick = (now: number) => {
-                    const progress = Math.min((now - startTime) / duration, 1);
-                    const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
-                    el.textContent = Math.floor(eased * target) + suffix;
-                    if (progress < 1) requestAnimationFrame(tick);
-                };
-
-                requestAnimationFrame(tick);
-            },
-            { threshold: 0.5 }
-        );
-
-        observer.observe(el);
-        return () => observer.disconnect();
-    }, [ref, target, suffix]);
+    return <motion.span ref={ref} className={className}>{rounded}</motion.span>;
 }
 
 export default function Presentation() {
     const sectionRef = useRef<HTMLElement>(null);
-    const count500Ref = useRef<HTMLSpanElement>(null);
-    const count7Ref = useRef<HTMLSpanElement>(null);
 
     useScrollReveal(sectionRef);
-    useCountUp(count500Ref, 500, "+");
-    useCountUp(count7Ref, 7, "+");
 
     return (
         <section ref={sectionRef} className="bg-[#f7f5f2] px-8 md:px-16 pt-40 pb-20 overflow-hidden">
@@ -102,10 +80,10 @@ export default function Presentation() {
                             data-delay="400"
                             className="bg-white border border-[#1a1a1a]/10 rounded-lg p-6 flex flex-col gap-1 shadow-sm"
                         >
-                            <span 
-                                ref={count500Ref} 
+                            <AnimatedCounter 
+                                target={500} 
+                                suffix="+" 
                                 className="text-4xl font-bold tracking-tight text-[#1a1a1a]"
-                                dangerouslySetInnerHTML={{ __html: "0+" }}
                             />
                             <span className="anony text-xs tracking-[0.2em] uppercase text-[#1a1a1a]/50">
                                 Trattamenti professionali
@@ -122,10 +100,10 @@ export default function Presentation() {
                             data-delay="200"
                             className="bg-[#1a1a1a] text-white rounded-lg p-6 flex flex-col gap-1 shadow-sm"
                         >
-                            <span 
-                                ref={count7Ref} 
+                            <AnimatedCounter 
+                                target={7} 
+                                suffix="+" 
                                 className="text-4xl font-bold tracking-tight"
-                                dangerouslySetInnerHTML={{ __html: "0+" }}
                             />
                             <span className="anony text-xs tracking-[0.2em] uppercase text-white/60">
                                 Anni di esperienza

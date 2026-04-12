@@ -246,7 +246,7 @@ export default function ServiziPage() {
                     </div>
 
                     <a
-                        href="https://www.treatwell.it" /* INSERIRE QUI IL LINK REALE DEL BOOKING */
+                        href="https://www.my-booking-app.com/booking/home/qO4wj8s1I6j8FYokIK91eNNQc14BwwiC?iso=it" /* INSERIRE QUI IL LINK REALE DEL BOOKING */
                         target="_blank"
                         rel="noopener noreferrer"
                         className="relative z-10 group/btn flex items-center justify-center gap-4 md:gap-6 bg-white text-[#1a1a1a] px-6 md:px-10 py-4 md:py-6 rounded-full hover:bg-[#f7f5f2] hover:scale-105 hover:shadow-[0_8px_40px_rgba(255,255,255,0.15)] transition-all duration-500 whitespace-nowrap shrink-0 border border-white/20"
