@@ -45,7 +45,7 @@ export default function ChiSiamoPage() {
                 {/* Glow decorativo */}
                 <div
                     aria-hidden="true"
-                    className="absolute top-[10%] right-[-10%] w-[400px] h-[400px] bg-rose-900/10 blur-[130px] rounded-full pointer-events-none"
+                    className="absolute top-[10%] right-[-10%] w-[400px] h-[400px] rounded-full pointer-events-none bg-[radial-gradient(circle_at_center,rgba(136,19,55,0.15)_0%,transparent_60%)]"
                 />
 
                 <div className="max-w-[95%] mx-auto px-4 md:px-16 pt-20 md:pt-32 relative z-10 w-full">
@@ -146,7 +146,7 @@ export default function ChiSiamoPage() {
             {/* ── CALL TO ACTION ESTERNA (CONTATTI) ── */}
             <div className="w-full max-w-[95%] mx-auto px-4 md:px-16 pb-20 md:pb-32">
                 <div data-reveal="up" className="relative w-full bg-[#1a1a1a] rounded-[2rem] p-10 md:p-20 overflow-hidden flex flex-col lg:flex-row items-start lg:items-center justify-between gap-12 group">
-                    <div className="absolute -top-[50%] -right-[10%] w-[500px] h-[500px] bg-white/5 blur-[120px] rounded-full pointer-events-none group-hover:bg-white/10 transition-colors duration-1000" />
+                    <div className="absolute -top-[50%] -right-[10%] w-[500px] h-[500px] rounded-full pointer-events-none bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08)_0%,transparent_60%)] group-hover:opacity-100 opacity-70 transition-opacity duration-1000" />
 
                     <div className="flex flex-col gap-6 relative z-10 max-w-2xl">
                         <span className="anony text-xs tracking-[0.3em] uppercase text-white/40">Vieni a Trovarci</span>

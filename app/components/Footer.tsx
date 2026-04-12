@@ -7,7 +7,8 @@ export default function Footer() {
     return (
         <footer className="bg-[#f7f5f2] text-[#1a1a1a] px-8 md:px-16 pt-24 pb-8 overflow-hidden relative border-t border-[#1a1a1a]/5">
             {/* Background Accent */}
-            <div className="pointer-events-none absolute top-0 right-0 w-96 h-96 bg-[#f7f5f2] rounded-full blur-[100px] -translate-y-1/2 translate-x-1/3" />
+            {/* Elemento circolare estetico per il blur di sfondo (convertito) */}
+            <div className="pointer-events-none absolute top-0 right-0 w-96 h-96 rounded-full -translate-y-1/2 translate-x-1/3 bg-[radial-gradient(circle_at_center,rgba(247,245,242,0.9)_0%,transparent_60%)]" />
 
             <div className="max-w-7xl mx-auto flex flex-col gap-16 relative z-10">
 

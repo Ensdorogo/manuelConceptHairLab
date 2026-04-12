@@ -47,7 +47,7 @@ export default function ContattiPage() {
                 {/* Bagliore di design dietro i testi */}
                 <div
                     aria-hidden="true"
-                    className="absolute top-[-20%] right-[-10%] w-[500px] h-[500px] bg-rose-900/10 blur-[120px] rounded-full pointer-events-none"
+                    className="absolute top-[-20%] right-[-10%] w-[500px] h-[500px] rounded-full pointer-events-none bg-[radial-gradient(circle_at_center,rgba(136,19,55,0.15)_0%,transparent_60%)]"
                 />
 
                 <div className="max-w-[95%] mx-auto px-4 md:px-16 pt-20 md:pt-32 relative z-10 w-full">

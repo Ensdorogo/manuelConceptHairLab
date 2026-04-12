@@ -13,7 +13,7 @@ export default function NotFound() {
             {/* Glow decorativo */}
             <div
                 aria-hidden="true"
-                className="absolute top-[20%] left-[50%] -translate-x-1/2 w-[600px] h-[600px] bg-white/5 blur-[130px] rounded-full pointer-events-none"
+                className="absolute top-[20%] left-[50%] -translate-x-1/2 w-[600px] h-[600px] rounded-full pointer-events-none bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08)_0%,transparent_60%)]"
             />
             
             <div className="flex-1 flex flex-col items-center justify-center max-w-[95%] mx-auto px-4 md:px-16 relative z-10 w-full text-center mt-20 mb-20 lg:my-0 lg:min-h-[70vh]">

@@ -11,7 +11,7 @@ export default function HeroText() {
       </p>
 
       {/* Main title */}
-      <h2 className="text-[clamp(3.5rem,7vw,6.5rem)] font-bold leading-none tracking-tight mb-6 animate-fade-up [animation-delay:0.35s]">
+      <h2 className="text-[clamp(2.8rem,5.5vw,5rem)] font-bold leading-[0.9] tracking-tight mb-6 animate-fade-up [animation-delay:0.35s]">
         L&apos;arte<br />
         del taglio<br />
         <em className="font-light not-italic opacity-85">perfetto.</em>

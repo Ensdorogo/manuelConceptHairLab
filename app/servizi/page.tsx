@@ -155,10 +155,7 @@ export default function ServiziPage() {
                 <Navbar />
 
                 <motion.div
-                    animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
-                    transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-                    aria-hidden="true"
-                    className="absolute top-[0%] left-[-10%] w-[600px] h-[600px] bg-rose-900/10 blur-[150px] rounded-full pointer-events-none"
+                    className="absolute top-[0%] left-[-10%] w-[600px] h-[600px] rounded-full pointer-events-none bg-[radial-gradient(circle_at_center,rgba(136,19,55,0.15)_0%,transparent_60%)]"
                 />
 
                 <div className="max-w-[95%] mx-auto px-4 md:px-16 pt-20 md:pt-32 relative z-10 w-full">
@@ -202,9 +199,13 @@ export default function ServiziPage() {
                                     />
                                 )}
 
-                                {/* Effetto aura diffusa per blocchi colorati */}
+                                {/* Effetto aura diffusa, convertito a radial-gradient dal CSS blurColors per prestazioni */}
                                 {servizio.hasBlur && (
-                                    <div className={`absolute top-1/3 left-1/2 -translate-x-1/2 w-48 h-48 blur-[60px] rounded-full pointer-events-none ${servizio.blurColor}`} />
+                                    <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-48 h-48 rounded-full pointer-events-none" 
+                                         style={{ 
+                                             background: servizio.blurColor?.includes('rose') ? 'radial-gradient(circle, rgba(136,19,55,0.2) 0%, transparent 70%)' : 'radial-gradient(circle, rgba(6,78,59,0.2) 0%, transparent 70%)'
+                                         }} 
+                                    />
                                 )}
 
                                 <div className="z-10 relative flex justify-between items-start">
@@ -232,8 +233,8 @@ export default function ServiziPage() {
             {/* ── CALL TO ACTION ESTERNA (PRENOTAZIONE) ── */}
             <div className="w-full max-w-[95%] mx-auto px-4 md:px-16 pb-20 md:pb-32">
                 <div data-reveal="up" className="relative w-full bg-[#1a1a1a] rounded-[2rem] p-10 md:p-20 overflow-hidden flex flex-col lg:flex-row items-start lg:items-center justify-between gap-12 group">
-                    {/* Elemento circolare estetico per il blur di sfondo */}
-                    <div className="absolute -top-[50%] -right-[10%] w-[500px] h-[500px] bg-white/5 blur-[120px] rounded-full pointer-events-none group-hover:bg-white/10 transition-colors duration-1000" />
+                    {/* Elemento circolare estetico per il blur di sfondo (convertito in radial-gradient per Safari) */}
+                    <div className="absolute -top-[50%] -right-[10%] w-[500px] h-[500px] rounded-full pointer-events-none bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08)_0%,transparent_60%)] group-hover:opacity-100 opacity-70 transition-opacity duration-1000" />
 
                     <div className="flex flex-col gap-6 relative z-10 max-w-2xl">
                         <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.05]">

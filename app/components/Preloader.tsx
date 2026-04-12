@@ -54,12 +54,12 @@ export default function Preloader() {
         <motion.div
           key="preloader"
           initial={{ opacity: 1 }}
-          exit={{ opacity: 0, scale: 1.05, filter: "blur(10px)" }} // Uscita più cinematografica
+          exit={{ opacity: 0, scale: 1.05 }} // Uscita senza blur per evitare lag su Safari
           transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
           className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#070707]"
         >
           {/* Subtile Glow Radiale al centro per dare profondità */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50vw] h-[50vw] bg-white opacity-[0.015] blur-[120px] rounded-full pointer-events-none" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50vw] h-[50vw] rounded-full pointer-events-none bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.03)_0%,transparent_60%)]" />
 
           {/* Sfondo noise leggero overlay */}
           <div className="absolute inset-0 opacity-[0.02] bg-[url(/noise.png)] bg-repeat pointer-events-none mix-blend-overlay" />
@@ -102,8 +102,8 @@ export default function Preloader() {
 
             {/* Slogan / Categoria che svanisce dentro alla fine */}
             <motion.div
-              initial={{ opacity: 0, y: 10, filter: "blur(4px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 2.2, ease: "easeOut" }}
               className="anony text-[10px] sm:text-xs tracking-[0.4em] uppercase text-white/50 -mt-10"
             >

@@ -37,12 +37,9 @@ export default function GalleriaPage() {
             <div className="bg-[#1a1a1a] pb-24 relative overflow-hidden">
                 <Navbar />
 
-                {/* Glow decorativo animato */}
-                <motion.div
-                    animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
-                    transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+                <div
                     aria-hidden="true"
-                    className="absolute top-[10%] -right-[10%] w-[600px] h-[600px] bg-rose-900/20 blur-[130px] rounded-full pointer-events-none"
+                    className="absolute top-[10%] -right-[10%] w-[600px] h-[600px] rounded-full pointer-events-none bg-[radial-gradient(circle_at_center,rgba(136,19,55,0.25)_0%,transparent_60%)]"
                 />
 
                 <div className="max-w-[95%] mx-auto px-4 md:px-16 pt-20 md:pt-32 relative z-10 w-full">
