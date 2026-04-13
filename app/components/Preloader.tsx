@@ -12,32 +12,37 @@ const greatVibes = Great_Vibes({
 export default function Preloader() {
   const [isLoading, setIsLoading] = useState(true);
   const [progress, setProgress] = useState(0);
+  const [showPreloader, setShowPreloader] = useState(true);
 
   useEffect(() => {
-    // Blocca lo scroll del body e imposta una classe per disattivare le animazioni CSS sottostanti
+    // Blocca lo scroll del body
     document.body.style.overflow = "hidden";
     document.body.classList.add("preloader-active");
 
-    // Simulazione contatore percentuale loading
     const progressInterval = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(progressInterval);
           return 100;
         }
-        // Il preloader vive per circa 3.8s, quindi arriviamo a 100% in ~2.5s (25ms * 100 = 2500ms)
         return prev + 1;
       });
     }, 25);
 
     const timeout = setTimeout(() => {
       setIsLoading(false);
+
+      // SALVIAMO IL COOKIE INVECE DEL SESSION STORAGE
+      // Omettendo la data di scadenza (expires), questo diventa un "Session Cookie"
+      // che si cancellerà automaticamente quando l'utente chiude il browser.
+      document.cookie = "hasSeenPreloader=true; path=/";
+
       document.body.style.overflow = "unset";
-      
-      // Aspettiamo che finisca l'animazione di uscita del preloader (0.9s) prima di sbloccare le animazioni del sito
+
       setTimeout(() => {
+        setShowPreloader(false);
         document.body.classList.remove("preloader-active");
-      }, 500); 
+      }, 500);
     }, 3800);
 
     return () => {
@@ -48,29 +53,30 @@ export default function Preloader() {
     };
   }, []);
 
+  if (!showPreloader) return null;
+
   return (
     <AnimatePresence>
       {isLoading && (
         <motion.div
           key="preloader"
           initial={{ opacity: 1 }}
-          exit={{ opacity: 0, scale: 1.05 }} // Uscita senza blur per evitare lag su Safari
+          exit={{ opacity: 0, scale: 1.05 }}
           transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
           className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#070707]"
         >
-          {/* Subtile Glow Radiale al centro per dare profondità */}
+          {/* Subtile Glow Radiale */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50vw] h-[50vw] rounded-full pointer-events-none bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.03)_0%,transparent_60%)]" />
 
-          {/* Sfondo noise leggero overlay */}
+          {/* Sfondo noise */}
           <div className="absolute inset-0 opacity-[0.02] bg-[url(/noise.png)] bg-repeat pointer-events-none mix-blend-overlay" />
 
           {/* Contenitore Centrale */}
           <div className="relative flex flex-col items-center z-10">
-            {/* Animazione "disegno" della scritta Manuel */}
             <motion.svg
-              width="300"
+              width="450"
               height="150"
-              viewBox="0 0 300 150"
+              viewBox="0 0 450 150"
               className="overflow-visible"
             >
               <motion.text
@@ -100,7 +106,6 @@ export default function Preloader() {
               </motion.text>
             </motion.svg>
 
-            {/* Slogan / Categoria che svanisce dentro alla fine */}
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -111,9 +116,9 @@ export default function Preloader() {
             </motion.div>
           </div>
 
-          {/* UI di Caricamento (Counter % e Location) */}
+          {/* UI di Caricamento */}
           <div className="absolute bottom-8 sm:bottom-12 w-full flex justify-between items-center px-8 sm:px-16 z-20">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 1, delay: 0.5 }}
@@ -136,11 +141,11 @@ export default function Preloader() {
             </motion.div>
           </div>
 
-          {/* Barra di progresso super sottile in basso */}
-          <motion.div 
-             className="absolute bottom-0 left-0 h-[1px] bg-white/20 z-20"
-             style={{ width: `${progress}%` }}
-             transition={{ ease: "linear" }}
+          {/* Barra di progresso */}
+          <motion.div
+            className="absolute bottom-0 left-0 h-[1px] bg-white/20 z-20"
+            style={{ width: `${progress}%` }}
+            transition={{ ease: "linear" }}
           />
         </motion.div>
       )}

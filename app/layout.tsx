@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Syne, Anonymous_Pro } from "next/font/google";
+import { cookies } from "next/headers"; // 1. IMPORTIAMO I COOKIES
 import "./globals.css";
 import SmoothScroll from "./components/SmoothScroll";
 import CustomCursor from "./components/CustomCursor";
@@ -15,8 +16,6 @@ const syne = Syne({
   variable: "--font-syne",
   subsets: ["latin"],
 });
-
-
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://manuelbarbiere.it'),
@@ -47,11 +46,16 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+// 2. AGGIUNTO 'async' ALLA FUNZIONE
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  // 3. AGGIUNTO 'await' ALLA CHIAMATA COOKIES() (Regola di Next 15/16)
+  const cookieStore = await cookies();
+  const hasSeenPreloader = cookieStore.get("hasSeenPreloader");
 
   // Struttura dati (Schema.org) vitale per far capire esattamente a Google Mappe e Ricerca Locale che attività siamo
   const jsonLd = {
@@ -107,7 +111,8 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <SmoothScroll>
-          <Preloader />
+          {/* 4. CONDIZIONE: Mostriamo il Preloader SOLO se il cookie non c'è */}
+          {!hasSeenPreloader && <Preloader />}
           <CustomCursor />
           {children}
         </SmoothScroll>

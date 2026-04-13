@@ -163,11 +163,4 @@
 }
 
 /* ─── Preloader State ────────────────────────────────────── */
-body.preloader-active main *,
-body.preloader-active header *,
-body.preloader-active nav *,
-body.preloader-active section *,
-body.preloader-active footer * {
-  animation-play-state: paused !important;
-  transition-delay: 9999s !important; /* Posticipa all'infinito le transizioni, per poi farle partire correttamente dal principio alla fine del preloader */
-}
+/* (Transition freeze logic removed to prevent framer-motion and Safari bugs) */

@@ -69,7 +69,7 @@ export default function Navbar() {
                 >
                     {/* Logo Section */}
                     <div
-                        className="flex flex-col cursor-pointer group relative z-50 py-2"
+                        className="flex flex-col cursor-pointer group relative z-50 py-4 md:py-2"
                         style={{ transitionDelay: "100ms" }}
                     >
                         <Link href="/" onClick={() => setMenuOpen(false)}>
