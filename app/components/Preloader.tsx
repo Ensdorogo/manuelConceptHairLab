@@ -74,14 +74,14 @@ export default function Preloader() {
           {/* Contenitore Centrale */}
           <div className="relative flex flex-col items-center z-10">
             <motion.svg
-              width="450"
-              height="150"
-              viewBox="0 0 450 150"
+              width="550"
+              height="180"
+              viewBox="0 0 550 180"
               className="overflow-visible"
             >
               <motion.text
                 x="50%"
-                y="45%"
+                y="50%"
                 textAnchor="middle"
                 dominantBaseline="middle"
                 className={`${greatVibes.className} text-[6rem]`}

@@ -58,7 +58,8 @@ export default function Footer() {
                         </p>
                         <p>
                             <a href="tel:+390362 173 9643" className="hover:text-[#1a1a1a] transition-colors duration-200">+39 0362 173 9643</a><br />
-                            <a href="mailto:info@manuelbarbiere.it" className="hover:text-[#1a1a1a] transition-colors duration-200">info@manuelbarbiere.it</a>
+                            <a href="https://wa.me/393499265915" target="_blank" rel="noopener noreferrer" className="hover:text-[#1a1a1a] transition-colors duration-200">WhatsApp: +39 349 926 5915</a><br />
+                            <a href="mailto:manuelconcepthairlab@gmail.com" className="hover:text-[#1a1a1a] transition-colors duration-200">manuelconcepthairlab@gmail.com</a>
                         </p>
                     </div>
 
@@ -112,7 +113,7 @@ export default function Footer() {
                                 </a>
                             </li>
                             <li>
-                                <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" className="hover:text-[#1a1a1a] transition-colors duration-200 flex items-center gap-2 group">
+                                <a href="https://www.tiktok.com/@manuelconcepthairlab" target="_blank" rel="noopener noreferrer" className="hover:text-[#1a1a1a] transition-colors duration-200 flex items-center gap-2 group">
                                     <span className="w-0 group-hover:w-2 h-px bg-[#1a1a1a] transition-all duration-300"></span> TikTok
                                 </a>
                             </li>
@@ -122,7 +123,7 @@ export default function Footer() {
 
                 {/* Bottom Bar: Copyright */}
                 <div className="pt-8 border-t border-[#1a1a1a]/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-[#1a1a1a]/50 anony tracking-wider">
-                    <p>© {new Date().getFullYear()} Manuel Concept Hair Lab. Tutti i diritti riservati.</p>
+                    <p>© {new Date().getFullYear()} Manuel Concept Hair Lab. Tutti i diritti riservati. | P.IVA: 10550970965</p>
                     <div className="flex items-center gap-4">
                         <Link href="/privacy" className="hover:text-[#1a1a1a] transition-colors">Privacy Policy</Link>
                     </div>

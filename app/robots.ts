@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: '/private/',
     },
-    sitemap: 'https://manuelbarbiere.it/sitemap.xml',
+    sitemap: 'https://manuelconcepthairlab.com/sitemap.xml',
   }
 }

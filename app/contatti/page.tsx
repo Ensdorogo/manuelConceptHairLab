@@ -5,7 +5,7 @@ import Footer from "@/app/components/Footer";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
-import { MapPin, Phone, Clock, ArrowUpRight, Scissors } from "lucide-react";
+import { MapPin, Phone, Clock, ArrowUpRight, Scissors, MessageCircle } from "lucide-react";
 
 // ── Hook per le animazioni di ingresso allo scroll/load ──
 function useScrollReveal(ref: React.RefObject<HTMLElement | null>) {
@@ -95,7 +95,10 @@ export default function ContattiPage() {
                                     className="group flex items-center justify-between gap-4 w-full sm:w-[90%] md:w-max min-w-0 md:min-w-[400px] px-6 py-4 md:py-5 border border-[#1a1a1a]/10 hover:border-[#1a1a1a]/30 rounded-2xl bg-white/50 hover:bg-white transition-all duration-500 hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)]"
                                 >
                                     <div className="flex flex-col gap-1 min-w-0">
-                                        <span className="anony text-[10px] sm:text-xs tracking-[0.2em] uppercase text-[#1a1a1a]/40 group-hover:text-[#1a1a1a]/70 transition-colors">Chiama in Salone</span>
+                                        <div className="flex items-center gap-2">
+                                            <Phone className="w-3 h-3 text-[#1a1a1a]/40 group-hover:text-[#1a1a1a]/70 transition-colors" />
+                                            <span className="anony text-[10px] sm:text-xs tracking-[0.2em] uppercase text-[#1a1a1a]/40 group-hover:text-[#1a1a1a]/70 transition-colors">Chiama in Salone</span>
+                                        </div>
                                         <span className="text-xl sm:text-3xl md:text-4xl font-bold text-[#1a1a1a] tracking-tight truncate">+39 0362 173 9643</span>
                                     </div>
                                     <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#f7f5f2] group-hover:bg-[#1a1a1a] border border-[#1a1a1a]/5 flex items-center justify-center transition-all duration-500 shrink-0 ml-auto group-hover:-translate-y-1 group-hover:translate-x-1">
@@ -104,12 +107,29 @@ export default function ContattiPage() {
                                 </a>
 
                                 <a
-                                    href="mailto:info@manuelbarbiere.it"
+                                    href="https://wa.me/393499265915"
+                                    target="_blank"
+                                    className="group flex items-center justify-between gap-4 w-full sm:w-[90%] md:w-max min-w-0 md:min-w-[400px] px-6 py-4 md:py-5 border border-[#1a1a1a]/10 hover:border-[#1a1a1a]/30 rounded-2xl bg-white/50 hover:bg-white transition-all duration-500 hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)]"
+                                >
+                                    <div className="flex flex-col gap-1 min-w-0">
+                                        <div className="flex items-center gap-2">
+                                            <MessageCircle className="w-3 h-3 text-[#1a1a1a]/40 group-hover:text-[#1a1a1a]/70 transition-colors" />
+                                            <span className="anony text-[10px] sm:text-xs tracking-[0.2em] uppercase text-[#1a1a1a]/40 group-hover:text-[#1a1a1a]/70 transition-colors">Scrivici su WhatsApp</span>
+                                        </div>
+                                        <span className="text-xl sm:text-3xl md:text-4xl font-bold text-[#1a1a1a] tracking-tight truncate">+39 349 926 5915</span>
+                                    </div>
+                                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#f7f5f2] group-hover:bg-[#25D366] border border-[#1a1a1a]/5 flex items-center justify-center transition-all duration-500 shrink-0 ml-auto group-hover:-translate-y-1 group-hover:translate-x-1">
+                                        <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 text-[#1a1a1a] group-hover:text-white transition-colors" strokeWidth={1.5} />
+                                    </div>
+                                </a>
+
+                                <a
+                                    href="mailto:manuelconcepthairlab@gmail.com"
                                     className="group flex items-center justify-between gap-4 w-full sm:w-[90%] md:w-max min-w-0 md:min-w-[400px] px-6 py-4 md:py-5 border border-[#1a1a1a]/10 hover:border-[#1a1a1a]/30 rounded-2xl bg-white/50 hover:bg-white transition-all duration-500 hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)]"
                                 >
                                     <div className="flex flex-col gap-1 min-w-0">
                                         <span className="anony text-[10px] sm:text-xs tracking-[0.2em] uppercase text-[#1a1a1a]/40 group-hover:text-[#1a1a1a]/70 transition-colors">Scrivici una Mail</span>
-                                        <span className="text-lg sm:text-xl md:text-2xl font-medium text-[#1a1a1a] tracking-tight truncate">info@manuelbarbiere.it</span>
+                                        <span className="text-lg sm:text-xl md:text-2xl font-medium text-[#1a1a1a] tracking-tight truncate">manuelconcepthairlab@gmail.com</span>
                                     </div>
                                     <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#f7f5f2] group-hover:bg-[#1a1a1a] border border-[#1a1a1a]/5 flex items-center justify-center transition-all duration-500 shrink-0 ml-auto group-hover:-translate-y-1 group-hover:translate-x-1">
                                         <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 text-[#1a1a1a] group-hover:text-white transition-colors" strokeWidth={1.5} />
@@ -167,16 +187,16 @@ export default function ContattiPage() {
                 {/* 7 Colonne - Visual Luxury (Interactive Map) */}
                 <div className="lg:col-span-7" data-reveal="clip" data-delay="300">
                     <div className="relative w-full h-[500px] md:h-[700px] overflow-hidden rounded-[2rem] bg-[#1a1a1a] group">
-                        
+
                         {/* Mappa in iframe con pointer-events-none per visualizzarla come foto estetica */}
-                        <iframe 
+                        <iframe
                             src="https://www.openstreetmap.org/export/embed.html?bbox=9.195,45.6498,9.205,45.6538&layer=mapnik"
                             className="absolute -top-[100px] -left-[100px] w-[calc(100%+200px)] h-[calc(100%+200px)] max-w-none pointer-events-none border-none"
                             style={{ filter: "grayscale(100%) contrast(1.15) brightness(0.95)" }}
                             title="Mappa Seregno"
                             loading="lazy"
                         />
-                        
+
                         {/* Gradiente di fusione */}
                         <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a]/40 to-transparent pointer-events-none" />
 
@@ -206,9 +226,9 @@ export default function ContattiPage() {
                         </div>
 
                         {/* Invisibile Overlay interattivo che porta alla mappa Google */}
-                        <a 
+                        <a
                             href="https://maps.google.com/?q=Via+San+Vitale+114,+Seregno"
-                            target="_blank" 
+                            target="_blank"
                             rel="noopener noreferrer"
                             className="absolute inset-0 z-30 cursor-pointer"
                             aria-label="Apri su Google Maps"

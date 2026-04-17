@@ -7,14 +7,10 @@ import {
     type LucideIcon,
 } from "lucide-react";
 
-// ═══════════════════════════════════════════════════════════════
-//  DATI SERVIZI — modifica solo questo array per aggiungere,
-//  rimuovere o aggiornare un servizio. Nient'altro va toccato.
-// ═══════════════════════════════════════════════════════════════
 
-type Categoria = "Uomo" | "Donna" | "Bambino" | "Colore" | "Trattamento";
+export type Categoria = "Uomo" | "Donna" | "Bambino" | "Colore" | "Trattamento";
 
-interface Servizio {
+export interface Servizio {
     id: string;
     nome: string;
     categoria: Categoria;
@@ -22,78 +18,102 @@ interface Servizio {
     prezzoLabel?: string; // opzionale — es. "da €18"
     Icona: LucideIcon;   // componente icona lucide-react
 }
-
-const SERVIZI: Servizio[] = [
-    {
-        id: "taglio-uomo",
-        nome: "Taglio Uomo",
-        categoria: "Uomo",
-        descrizione:
-            "Taglio personalizzato con consulenza stilistica. Shampoo e asciugatura inclusi.",
-        prezzoLabel: "da €18",
-        Icona: Scissors,
-    },
+export const SERVIZI: Servizio[] = [
     {
         id: "taglio-donna",
         nome: "Taglio Donna",
         categoria: "Donna",
-        descrizione:
-            "Taglio su misura per valorizzare la forma del viso e la texture naturale dei capelli.",
-        prezzoLabel: "da €25",
+        descrizione: "Servizio di stilistica con taglio personalizzato per donna.",
+        prezzoLabel: "€ 26",
         Icona: Sparkles,
     },
     {
-        id: "taglio-bambino",
-        nome: "Taglio Bambino",
+        id: "taglio-uomo",
+        nome: "Taglio Uomo",
+        categoria: "Uomo",
+        descrizione: "Servizio di stilistica con taglio e consulenza per uomo.",
+        prezzoLabel: "€ 22",
+        Icona: Scissors,
+    },
+    {
+        id: "taglio-bimbo",
+        nome: "Taglio Bimbo",
         categoria: "Bambino",
-        descrizione: "Taglio delicato e divertente per i più piccoli, fino a 12 anni.",
-        prezzoLabel: "da €12",
+        descrizione: "Servizio di stilistica dedicato ai più piccoli.",
+        prezzoLabel: "€ 17",
         Icona: Baby,
     },
     {
-        id: "piega",
-        nome: "Piega",
+        id: "pieghe",
+        nome: "Pieghe",
         categoria: "Donna",
-        descrizione:
-            "Piega liscia, mossa o riccia con prodotti professionali. Resa impeccabile e duratura.",
-        prezzoLabel: "da €20",
+        descrizione: "Corta (€21), Media (€23), Lunga (€28), oppure Piega elaborata da 1 Ora (€35).",
+        prezzoLabel: "da € 21",
         Icona: Wind,
     },
     {
-        id: "colore",
-        nome: "Colore",
+        id: "acconciature",
+        nome: "Acconciature",
+        categoria: "Donna",
+        descrizione: "Semi raccolto e trecce (€20, piega esclusa) oppure Raccolto completo (da €50).",
+        prezzoLabel: "da € 20",
+        Icona: Sparkles,
+    },
+    {
+        id: "colore-base",
+        nome: "Colore & Decolorazione",
         categoria: "Colore",
-        descrizione:
-            "Colorazione permanente o semipermanente per una copertura uniforme e brillante.",
-        prezzoLabel: "da €35",
+        descrizione: "Servizio di colorazione classica (da €40).",
+        prezzoLabel: "da € 40",
+        Icona: Palette,
+    },
+    {
+        id: "tonalizzante",
+        nome: "Tonalizzante",
+        categoria: "Colore",
+        descrizione: "Tonalizzante specifico applicato su colore (da €20) o su schiariture (da €25).",
+        prezzoLabel: "da € 20",
         Icona: Palette,
     },
     {
         id: "schiariture",
         nome: "Schiariture",
         categoria: "Colore",
-        descrizione:
-            "Balayage, highlights e shatush per un effetto luce naturale e tridimensionale.",
-        prezzoLabel: "da €50",
+        descrizione: "Tecniche di illuminazione: Balayage, Shatush e Colpi di sole.",
+        prezzoLabel: "da € 65",
         Icona: Sun,
     },
     {
-        id: "barba",
-        nome: "Rasatura & Barba",
-        categoria: "Uomo",
-        descrizione:
-            "Rifinitura, modellatura o rasatura completa con asciugamano caldo e prodotti premium.",
-        prezzoLabel: "da €10",
+        id: "tecnico-luxury",
+        nome: "Tecnico Luxury",
+        categoria: "Colore",
+        descrizione: "Airtouch (da €300) e Tecnica Mounir (da €400). Tonalizzante e piega inclusi.",
+        prezzoLabel: "da € 300",
         Icona: Zap,
     },
     {
-        id: "trattamento",
-        nome: "Trattamento Intensivo",
+        id: "schiariture-coppola",
+        nome: "Schiariture Coppola",
+        categoria: "Colore",
+        descrizione: "Servizio tecnico avanzato di schiariture firmato Coppola.",
+        prezzoLabel: "da € 80",
+        Icona: Zap,
+    },
+    {
+        id: "trattamenti",
+        nome: "Trattamenti",
         categoria: "Trattamento",
-        descrizione:
-            "Maschera nutriente, idratante o ristrutturante selezionata in base al tipo di capello.",
-        prezzoLabel: "da €15",
+        descrizione: "Ricostruzione intensiva alla Cheratina, studiata sulle esigenze del capello.",
+        prezzoLabel: "Su preventivo",
         Icona: Leaf,
+    },
+    {
+        id: "servizi-sposa",
+        nome: "Servizi Sposa",
+        categoria: "Donna",
+        descrizione: "Raccolto Negozio/Domicilio (da €150/€400) e prova 1 ora (€50, piega inclusa).",
+        prezzoLabel: "da € 50",
+        Icona: Sparkles,
     },
 ];
 

@@ -18,20 +18,37 @@ const syne = Syne({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://manuelbarbiere.it'),
+  metadataBase: new URL('https://manuelconcepthairlab.com'),
   title: {
     default: "Manuel Concept Hair Lab | Parrucchiere Seregno",
     template: "%s | Manuel Hair",
   },
   description: "Parrucchiere e Barbiere a Seregno (Monza e Brianza). Esperti in tagli sartoriali, balayage, colorazioni artistiche e trattamenti premium uomo/donna.",
   keywords: ["Parrucchiere Seregno", "Barbiere Seregno", "Parrucchiere Monza e Brianza", "Miglior parrucchiere Seregno", "Taglio capelli Monza", "Salone di bellezza Seregno", "Manuel Concept Hair Lab"],
+  alternates: {
+    canonical: 'https://manuelconcepthairlab.com',
+  },
   openGraph: {
     type: "website",
     locale: "it_IT",
-    url: "https://manuelbarbiere.it",
+    url: "https://manuelconcepthairlab.com",
     title: "Manuel Concept Hair Lab | Il tuo Parrucchiere a Seregno",
     description: "Il laboratorio di stile a Seregno (MB). Rilassati in un ambiente esclusivo.",
-    siteName: "Manuel Hair Concept Lab",
+    siteName: "Manuel Concept Hair Lab",
+    images: [
+      {
+        url: "/salone1.webp",
+        width: 1200,
+        height: 630,
+        alt: "Manuel Concept Hair Lab Seregno"
+      }
+    ]
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Manuel Concept Hair Lab | Parrucchiere Seregno",
+    description: "Parrucchiere e Barbiere a Seregno. Tagli sartoriali e trattamenti premium.",
+    images: ["/salone1.webp"],
   },
   robots: {
     index: true,
@@ -46,24 +63,21 @@ export const metadata: Metadata = {
   },
 };
 
-// 2. AGGIUNTO 'async' ALLA FUNZIONE
 export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
 
-  // 3. AGGIUNTO 'await' ALLA CHIAMATA COOKIES() (Regola di Next 15/16)
   const cookieStore = await cookies();
   const hasSeenPreloader = cookieStore.get("hasSeenPreloader");
 
-  // Struttura dati (Schema.org) vitale per far capire esattamente a Google Mappe e Ricerca Locale che attività siamo
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "HairSalon",
     "name": "Manuel Concept Hair Lab",
-    "image": "https://manuelbarbiere.it/salon-interior.png",
-    "url": "https://manuelbarbiere.it",
+    "image": "https://manuelconcepthairlab.com/salone1.webp",
+    "url": "https://manuelconcepthairlab.com",
     "telephone": "+3903621739643",
     "address": {
       "@type": "PostalAddress",
@@ -97,6 +111,11 @@ export default async function RootLayout({
         "opens": "09:00",
         "closes": "19:00"
       }
+    ],
+    "priceRange": "€€",
+    "sameAs": [
+      "https://www.facebook.com/manuelconcepthairlab",
+      "https://www.instagram.com/manuel_concept_hair_lab"
     ]
   };
 

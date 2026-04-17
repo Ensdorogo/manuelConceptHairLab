@@ -90,9 +90,14 @@ export default function ChiSiamoPage() {
                         </div>
                     </div>
 
-                    <div className="relative h-[450px] md:h-[650px] rounded-[2rem] overflow-hidden order-1 lg:order-2" data-reveal="clip" data-delay="200">
+                    <div 
+                        className="relative h-[450px] md:h-[650px] rounded-[2rem] overflow-hidden order-1 lg:order-2 isolate" 
+                        style={{ WebkitMaskImage: '-webkit-radial-gradient(white, black)', transform: 'translateZ(0)' }}
+                        data-reveal="clip" 
+                        data-delay="200"
+                    >
                         <Image
-                            src="/modern-salon.png"
+                            src="/salone2.webp"
                             alt="Design architettonico e minimalista dello spazio"
                             fill
                             className="object-cover scale-105 group-hover:scale-100 transition-transform duration-[2s]"
@@ -103,9 +108,14 @@ export default function ChiSiamoPage() {
 
                 {/* ── SEZIONE 2: IL TEAM ── */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
-                    <div className="relative h-[450px] md:h-[650px] rounded-[2rem] overflow-hidden" data-reveal="clip" data-delay="200">
+                    <div 
+                        className="relative h-[450px] md:h-[650px] rounded-[2rem] overflow-hidden isolate" 
+                        style={{ WebkitMaskImage: '-webkit-radial-gradient(white, black)', transform: 'translateZ(0)' }}
+                        data-reveal="clip" 
+                        data-delay="200"
+                    >
                         <Image
-                            src="/modern-team.png"
+                            src="/salone3.webp"
                             alt="Il team di Manuel Hair in divisa nera e stile moderno"
                             fill
                             className="object-cover scale-105 group-hover:scale-100 transition-transform duration-[2s]"

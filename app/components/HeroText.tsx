@@ -11,11 +11,11 @@ export default function HeroText() {
       </p>
 
       {/* Main title */}
-      <h2 className="text-[clamp(2.8rem,5.5vw,5rem)] font-bold leading-[0.9] tracking-tight mb-6 animate-fade-up [animation-delay:0.35s]">
+      <h1 className="text-[clamp(2.8rem,5.5vw,5rem)] font-bold leading-[0.9] tracking-tight mb-6 animate-fade-up [animation-delay:0.35s]">
         L&apos;arte<br />
         del taglio<br />
         <em className="font-light not-italic opacity-85">perfetto.</em>
-      </h2>
+      </h1>
 
       {/* Subtitle */}
       <p className="text-base font-light leading-relaxed opacity-70 mb-10 animate-fade-up [animation-delay:0.55s]">

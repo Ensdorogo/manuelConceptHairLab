@@ -8,12 +8,10 @@ import { useRef, useState } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 
 const photos = [
-    { src: "/gallery/photo_1.jpg", alt: "Urban Fade", aspect: "aspect-[3/4]" },
-    { src: "/gallery/photo_2.jpg", alt: "Balayage & Texture", aspect: "aspect-[4/5]" },
-    { src: "/gallery/photo_3.jpg", alt: "Street Aesthetic", aspect: "aspect-[1/1]" },
-    { src: "/gallery/photo_4.jpg", alt: "Modern Shag", aspect: "aspect-[3/4]" },
-    { src: "/gallery/photo_5.jpg", alt: "Onde Naturali", aspect: "aspect-[4/5]" },
-    { src: "/gallery/photo_6.jpg", alt: "Clean Cut", aspect: "aspect-[3/4]" },
+    { src: "/gallery/_MG_0240.webp", alt: "Interno del salone Manuel Concept Hair Lab Seregno", aspect: "aspect-[3/4]" },
+    { src: "/gallery/_MG_0244.webp", alt: "Dettaglio postazione taglio e arredamento luxury", aspect: "aspect-[4/5]" },
+    { src: "/gallery/_MG_0255.webp", alt: "Atmosfera e design del salone di parrucchiere", aspect: "aspect-[1/1]" },
+    { src: "/gallery/_MG_0258.webp", alt: "Dettagli tecnici e strumenti professionali", aspect: "aspect-[3/4]" }
 ];
 
 export default function GalleriaPage() {
@@ -89,7 +87,7 @@ export default function GalleriaPage() {
                         style={{ y: yCol1 }}
                         className="w-full md:w-1/2 flex flex-col gap-16 md:gap-32"
                     >
-                        {[photos[0], photos[2], photos[4]].map((photo, i) => (
+                        {photos.filter((_, i) => i % 2 === 0).map((photo, i) => (
                             <motion.div
                                 key={`col1-${i}`}
                                 initial={{ opacity: 0, y: 50 }}
@@ -102,15 +100,25 @@ export default function GalleriaPage() {
                                 data-hoverable="true"
                                 data-cursor-text="view"
                             >
-                                <div className={`relative w-full ${photo.aspect} rounded-[2rem] overflow-hidden bg-[#1a1a1a]/5 will-change-transform`}>
+                                <div 
+                                    className={`relative w-full ${photo.aspect} rounded-[2rem] overflow-hidden bg-[#1a1a1a]/5 will-change-transform isolate`}
+                                    style={{ WebkitMaskImage: '-webkit-radial-gradient(white, black)', transform: 'translateZ(0)' }}
+                                >
                                     <motion.div
                                         className="w-full h-full"
                                         whileHover={{ scale: 1.05 }}
                                         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                                     >
-                                        <Image src={photo.src} alt={photo.alt} fill className="object-cover" />
+                                        <Image
+                                            src={photo.src}
+                                            alt={photo.alt}
+                                            fill
+                                            className="object-cover"
+                                            sizes="(max-width: 768px) 100vw, 600px"
+                                            quality={80}
+                                            priority={i === 0}
+                                        />
                                     </motion.div>
-                                    {/* Vignette Overlay Estetico minimal (Senza cerchio testuale) */}
                                     <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                                 </div>
                                 <div className="flex items-center justify-between px-2 opacity-60 group-hover:opacity-100 transition-opacity duration-300">
@@ -126,7 +134,7 @@ export default function GalleriaPage() {
                         style={{ y: yCol2 }}
                         className="w-full md:w-1/2 flex flex-col gap-16 md:gap-32 mt-20 md:mt-64"
                     >
-                        {[photos[1], photos[3], photos[5]].map((photo, i) => (
+                        {photos.filter((_, i) => i % 2 !== 0).map((photo, i) => (
                             <motion.div
                                 key={`col2-${i}`}
                                 initial={{ opacity: 0, y: 50 }}
@@ -145,9 +153,16 @@ export default function GalleriaPage() {
                                         whileHover={{ scale: 1.05 }}
                                         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                                     >
-                                        <Image src={photo.src} alt={photo.alt} fill className="object-cover" />
+                                        <Image
+                                            src={photo.src}
+                                            alt={photo.alt}
+                                            fill
+                                            className="object-cover"
+                                            sizes="(max-width: 768px) 100vw, 600px"
+                                            quality={80}
+                                            priority={i === 0}
+                                        />
                                     </motion.div>
-                                    {/* Vignette Overlay Estetico minimal (Senza cerchio testuale) */}
                                     <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                                 </div>
                                 <div className="flex items-center justify-between px-2 opacity-60 group-hover:opacity-100 transition-opacity duration-300">
@@ -179,10 +194,13 @@ export default function GalleriaPage() {
                             className="relative w-full h-full max-w-6xl max-h-[90vh] rounded-[2rem] overflow-hidden shadow-2xl"
                         >
                             <Image
+                                id={`lightbox-${selectedId}`}
                                 src={selectedId}
                                 alt="Gallery Lightbox"
                                 fill
                                 className="object-contain md:object-cover"
+                                sizes="100vw"
+                                quality={90}
                             />
 
                             {/* Stile bottone chiusura overlay */}

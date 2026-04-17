@@ -64,13 +64,15 @@ export default function Presentation() {
                         <div
                             data-reveal="clip"
                             data-delay="0"
-                            className="relative overflow-hidden rounded-lg aspect-[3/4]"
+                            className="relative overflow-hidden rounded-lg aspect-[3/4] isolate"
+                            style={{ WebkitMaskImage: '-webkit-radial-gradient(white, black)', transform: 'translateZ(0)' }}
                         >
                             <Image
-                                src="/salon-interior.png"
+                                src="/salone1.webp"
                                 alt="Interno del salone"
                                 fill
                                 className="object-cover"
+                                sizes="(max-width: 768px) 50vw, (max-width: 1200px) 50vw, 900px"
                             />
                         </div>
 
@@ -80,9 +82,9 @@ export default function Presentation() {
                             data-delay="400"
                             className="bg-white border border-[#1a1a1a]/10 rounded-lg p-6 flex flex-col gap-1 shadow-sm"
                         >
-                            <AnimatedCounter 
-                                target={500} 
-                                suffix="+" 
+                            <AnimatedCounter
+                                target={500}
+                                suffix="+"
                                 className="text-4xl font-bold tracking-tight text-[#1a1a1a]"
                             />
                             <span className="anony text-xs tracking-[0.2em] uppercase text-[#1a1a1a]/50">
@@ -100,9 +102,9 @@ export default function Presentation() {
                             data-delay="200"
                             className="bg-[#1a1a1a] text-white rounded-lg p-6 flex flex-col gap-1 shadow-sm"
                         >
-                            <AnimatedCounter 
-                                target={7} 
-                                suffix="+" 
+                            <AnimatedCounter
+                                target={7}
+                                suffix="+"
                                 className="text-4xl font-bold tracking-tight"
                             />
                             <span className="anony text-xs tracking-[0.2em] uppercase text-white/60">
@@ -114,13 +116,15 @@ export default function Presentation() {
                         <div
                             data-reveal="clip"
                             data-delay="200"
-                            className="relative overflow-hidden rounded-lg aspect-[3/4]"
+                            className="relative overflow-hidden rounded-lg aspect-[3/4] isolate"
+                            style={{ WebkitMaskImage: '-webkit-radial-gradient(white, black)', transform: 'translateZ(0)' }}
                         >
                             <Image
-                                src="/woman-hair.png"
+                                src="/salone4.webp"
                                 alt="Styling donna"
                                 fill
                                 className="object-cover"
+                                sizes="(max-width: 768px) 50vw, (max-width: 1200px) 50vw, 900px"
                             />
                         </div>
                     </div>

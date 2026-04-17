@@ -73,11 +73,11 @@ export default function Navbar() {
                         style={{ transitionDelay: "100ms" }}
                     >
                         <Link href="/" onClick={() => setMenuOpen(false)}>
-                            <h1 className="text-2xl font-bold tracking-tight uppercase group-hover:text-white/80 transition-colors duration-300">
-                                Manuel Concept
-                            </h1>
+                            <span className="text-2xl font-bold tracking-tight uppercase group-hover:text-white/80 transition-colors duration-300">
+                                Manuel
+                            </span>
                             <p className="anony text-[10px] tracking-[0.25em] text-white/50 uppercase group-hover:text-white/80 transition-colors duration-300">
-                                Hair Lab
+                                Concept Hair Lab
                             </p>
                         </Link>
                     </div>
@@ -182,7 +182,8 @@ export default function Navbar() {
                 >
                     <p className="anony text-xs tracking-widest text-white/50 uppercase mb-2">Contattaci</p>
                     <a href="tel:+3903621739643" className="block text-white mb-1">+39 0362 173 9643</a>
-                    <a href="mailto:info@manuelbarbiere.it" className="block text-white">info@manuelbarbiere.it</a>
+                    <a href="https://wa.me/393499265915" target="_blank" rel="noopener noreferrer" className="block text-white mb-1">WhatsApp: +39 349 926 5915</a>
+                    <a href="mailto:manuelconcepthairlab@gmail.com" className="block text-white">manuelconcepthairlab@gmail.com</a>
                 </div>
             </div>
         </>
