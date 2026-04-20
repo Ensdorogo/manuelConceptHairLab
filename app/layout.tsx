@@ -5,6 +5,8 @@ import "./globals.css";
 import SmoothScroll from "./components/SmoothScroll";
 import CustomCursor from "./components/CustomCursor";
 import Preloader from "./components/Preloader";
+import Script from 'next/script';
+
 
 const anonymousPro = Anonymous_Pro({
   variable: "--font-anonymous-pro",
@@ -124,13 +126,19 @@ export default async function RootLayout({
       lang="it"
       className={`${syne.variable} ${anonymousPro.variable} antialiased`}
     >
+      <head>
+        <Script
+          src="https://cloud.umami.is/script.js"
+          data-website-id="7cea288f-11ab-4b67-92e3-1a62c1948ed6"
+          strategy="afterInteractive"
+        />
+      </head>
       <body className="flex flex-col">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <SmoothScroll>
-          {/* 4. CONDIZIONE: Mostriamo il Preloader SOLO se il cookie non c'è */}
           {!hasSeenPreloader && <Preloader />}
           <CustomCursor />
           {children}
