@@ -27,9 +27,6 @@ export const metadata: Metadata = {
   },
   description: "Parrucchiere e Barbiere a Seregno (Monza e Brianza). Esperti in tagli sartoriali, balayage, colorazioni artistiche e trattamenti premium uomo/donna.",
   keywords: ["Parrucchiere Seregno", "Barbiere Seregno", "Parrucchiere Monza e Brianza", "Miglior parrucchiere Seregno", "Taglio capelli Monza", "Salone di bellezza Seregno", "Manuel Concept Hair Lab"],
-  alternates: {
-    canonical: 'https://manuelconcepthairlab.com',
-  },
   openGraph: {
     type: "website",
     locale: "it_IT",

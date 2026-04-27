@@ -4,13 +4,19 @@ import HeroText from "./components/HeroText";
 import Presentation from "./components/Presentation";
 import ShowServizi from "./components/ShowServizi";
 import Footer from "./components/Footer";
+import Image from "next/image";
+
+
 
 export const metadata: Metadata = {
   title: "Manuel Concept Hair Lab",
   description: "Parruchiere e Barbiere a Seregno. Tagli sartoriali uomo e donna, colorazioni artistiche e trattamenti di altissimo livello in un ambiente esclusivo di totale relax.",
+  alternates: {
+    canonical: '/',
+  },
 };
 
-import Image from "next/image";
+
 
 export default function Home() {
   return (
