@@ -20,7 +20,7 @@ const syne = Syne({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://manuelconcepthairlab.com'),
+  metadataBase: new URL('https://www.manuelconcepthairlab.com'),
   title: {
     default: "Manuel Concept Hair Lab | Parrucchiere Seregno",
     template: "%s | Manuel Hair",
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "it_IT",
-    url: "https://manuelconcepthairlab.com",
+    url: "https://www.manuelconcepthairlab.com",
     title: "Manuel Concept Hair Lab | Il tuo Parrucchiere a Seregno",
     description: "Il laboratorio di stile a Seregno (MB). Rilassati in un ambiente esclusivo.",
     siteName: "Manuel Concept Hair Lab",
@@ -75,8 +75,8 @@ export default async function RootLayout({
     "@context": "https://schema.org",
     "@type": "HairSalon",
     "name": "Manuel Concept Hair Lab",
-    "image": "https://manuelconcepthairlab.com/salone1.webp",
-    "url": "https://manuelconcepthairlab.com",
+    "image": "https://www.manuelconcepthairlab.com/salone1.webp",
+    "url": "https://www.manuelconcepthairlab.com",
     "telephone": "+3903621739643",
     "address": {
       "@type": "PostalAddress",
