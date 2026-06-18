@@ -2,7 +2,6 @@
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
-import { motion, useInView, useMotionValue, useTransform, animate } from "framer-motion";
 
 /* ── Hook: IntersectionObserver scroll reveal ── */
 function useScrollReveal(ref: React.RefObject<HTMLElement | null>) {
@@ -29,20 +28,37 @@ function useScrollReveal(ref: React.RefObject<HTMLElement | null>) {
     }, [ref]);
 }
 
-/* ── Componente: Animated Counter via Framer Motion ── */
+/* ── Componente: AnimatedCounter nativo — zero Framer Motion ── */
 function AnimatedCounter({ target, suffix = "", className }: { target: number; suffix?: string; className?: string }) {
     const ref = useRef<HTMLSpanElement>(null);
-    const inView = useInView(ref, { once: true, margin: "-50px" });
-    const count = useMotionValue(0);
-    const rounded = useTransform(count, (latest) => Math.floor(latest) + suffix);
 
     useEffect(() => {
-        if (inView) {
-            animate(count, target, { duration: 1.6, ease: "easeOut" });
-        }
-    }, [inView, count, target]);
+        const el = ref.current;
+        if (!el) return;
 
-    return <motion.span ref={ref} className={className}>{rounded}</motion.span>;
+        const observer = new IntersectionObserver(([entry]) => {
+            if (!entry.isIntersecting) return;
+            observer.disconnect();
+
+            const DURATION = 1600;
+            const start = performance.now();
+
+            const tick = (now: number) => {
+                const progress = Math.min(1, (now - start) / DURATION);
+                // ease-out cubic
+                const eased = 1 - Math.pow(1 - progress, 3);
+                el.textContent = `${Math.floor(eased * target)}${suffix}`;
+                if (progress < 1) requestAnimationFrame(tick);
+            };
+
+            requestAnimationFrame(tick);
+        }, { threshold: 0.5, rootMargin: "-50px" });
+
+        observer.observe(el);
+        return () => observer.disconnect();
+    }, [target, suffix]);
+
+    return <span ref={ref} className={className}>0{suffix}</span>;
 }
 
 export default function Presentation() {
@@ -162,9 +178,7 @@ export default function Presentation() {
                         data-delay="440"
                         className="leading-relaxed text-base"
                     >
-                        Non siamo la solita parruccheria impettita. Siamo un Urban Atelier
-                        a Seregno dove puoi sentirti a casa, bere un buon caffè e affidare
-                        la tua testa a chi sa davvero cosa sta facendo.
+                        Non siamo il solito salone. Siamo uno spazio dal design super moderno, il tuo parrucchiere e barbiere a Seregno dove puoi sentirti a casa, berti un caffè e affidare i tuoi capelli a chi conosce davvero i trend del momento.
                     </p>
 
                     <p
@@ -172,9 +186,7 @@ export default function Presentation() {
                         data-delay="560"
                         className="leading-relaxed text-base "
                     >
-                        Dalle schiariture più audaci al grooming maschile vecchio stile,
-                        trattiamo ogni capello come un pezzo unico da collezione. Nessun
-                        giudizio, solo stile puro e qualche battuta di troppo.
+                        Dalle schiariture più pazzesche come balayage e degradé, ai tagli donna più freschi, fino alle sfumature maschili razor fade. Creiamo look unici nel nostro hair salon nel cuore della Brianza.
                     </p>
                 </div>
 

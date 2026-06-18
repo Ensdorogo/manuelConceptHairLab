@@ -102,7 +102,7 @@ export default function ServiziPage() {
     };
 
     return (
-        <main ref={sectionRef} className="min-h-screen bg-[#f7f5f2] flex flex-col">
+        <main ref={sectionRef} className="min-h-[100dvh] bg-[#f7f5f2] flex flex-col">
 
             <div className="bg-[#1a1a1a] pb-24 md:pb-36 relative overflow-hidden">
                 <Navbar />
@@ -130,6 +130,9 @@ export default function ServiziPage() {
                             I Nostri<br />
                             <em className="font-light italic text-white/50">Servizi.</em>
                         </h1>
+                        <p data-reveal="up" data-delay="200" className="text-white/60 text-lg max-w-xl mt-4 leading-relaxed">
+                            Dai tagli più freschi per uomo e donna, fino ai balayage e colori di tendenza. Scopri tutti i servizi del tuo parrucchiere a Seregno.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -207,7 +210,7 @@ export default function ServiziPage() {
                             <em className="font-light italic text-white/50">momento.</em>
                         </h2>
                         <p className="text-white/60 text-lg leading-relaxed max-w-lg">
-                            Accedi al nostro portale booking esterno. Scegli il servizio più adatto a te e seleziona comodamente il giorno e l'orario.
+                            Accedi al nostro portale booking esterno. Scegli il servizio di parrucchiere o barbiere più adatto a te e prenota comodamente il tuo appuntamento a Seregno.
                         </p>
                     </div>
 

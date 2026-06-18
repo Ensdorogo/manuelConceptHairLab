@@ -8,23 +8,32 @@ export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
 
     useEffect(() => {
-        // Attende che il preloader sia finito prima di triggerare l'animazione d'ingresso
-        const checkPreloader = setInterval(() => {
-            if (!document.body.classList.contains("preloader-active")) {
-                setMounted(true);
-                clearInterval(checkPreloader);
-            }
-        }, 100);
+        // Se non c'è la classe preloader-active, navbar visibile subito
+        if (!document.body.classList.contains("preloader-active")) {
+            setMounted(true);
+        } else {
+            // MutationObserver: reagisce solo quando classList cambia, zero polling
+            const observer = new MutationObserver(() => {
+                if (!document.body.classList.contains("preloader-active")) {
+                    setMounted(true);
+                    observer.disconnect();
+                }
+            });
+            observer.observe(document.body, {
+                attributes: true,
+                attributeFilter: ["class"],
+            });
+        }
 
         // Tracking dello scorrimento per rendere la navbar 'fixed e glass'
+        // DEVE essere sempre registrato, indipendentemente dal preloader
         const handleScroll = () => {
             setScrolled(window.scrollY > 30);
         };
 
-        window.addEventListener("scroll", handleScroll);
+        window.addEventListener("scroll", handleScroll, { passive: true });
 
         return () => {
-            clearInterval(checkPreloader);
             window.removeEventListener("scroll", handleScroll);
         };
     }, []);
@@ -57,7 +66,7 @@ export default function Navbar() {
             <header
                 className={`
                     fixed w-full top-0 left-0 z-50 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]
-                    ${scrolled ? "bg-[#1a1a1a]/90 backdrop-blur-xl border-b border-white/5 py-1" : "bg-transparent py-3"}
+                    ${scrolled ? "bg-[#1a1a1a]/90 backdrop-blur-sm border-b border-white/5 py-1" : "bg-transparent py-3"}
                 `}
             >
                 <nav

@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
@@ -23,12 +21,12 @@ export default function Footer() {
                             <span className="font-light italic text-[#1a1a1a]/50">appuntamento.</span>
                         </h2>
                     </div>
-                    <div className="flex justify-start md:justify-end">
+                    <div className="flex w-full md:w-auto justify-center md:justify-end">
                         <a
                             href="tel:+390362 173 9643"
                             className="
-                                group inline-flex items-center gap-4 border border-[#1a1a1a]/20 
-                                rounded-full pl-8 pr-3 py-3 hover:bg-[#1a1a1a] hover:text-white
+                                group flex w-full md:w-auto items-center justify-center gap-4 border border-[#1a1a1a]/20 
+                                rounded-full pl-6 pr-4 py-3 md:pl-8 md:pr-3 hover:bg-[#1a1a1a] hover:text-white
                                 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]
                             "
                         >
@@ -122,7 +120,7 @@ export default function Footer() {
                 </div>
 
                 {/* Bottom Bar: Copyright */}
-                <div className="pt-8 border-t border-[#1a1a1a]/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-[#1a1a1a]/50 anony tracking-wider">
+                <div className="pt-8 border-t border-[#1a1a1a]/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-center text-[#1a1a1a]/50 anony tracking-wider">
                     <p>© {new Date().getFullYear()} Manuel Concept Hair Lab. Tutti i diritti riservati. | P.IVA: 10550970965</p>
                     <div className="flex items-center gap-4">
                         <Link href="/privacy" className="hover:text-[#1a1a1a] transition-colors">Privacy Policy</Link>

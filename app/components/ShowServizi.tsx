@@ -17,6 +17,7 @@ export interface Servizio {
     descrizione: string;
     prezzoLabel?: string; // opzionale — es. "da €18"
     Icona: LucideIcon;   // componente icona lucide-react
+    popolare?: boolean;
 }
 export const SERVIZI: Servizio[] = [
     {
@@ -26,36 +27,38 @@ export const SERVIZI: Servizio[] = [
         descrizione: "Servizio di stilistica con taglio personalizzato per donna.",
         prezzoLabel: "€ 26",
         Icona: Sparkles,
+        popolare: true,
     },
     {
         id: "taglio-uomo",
         nome: "Taglio Uomo",
         categoria: "Uomo",
         descrizione: "Servizio di stilistica con taglio e consulenza per uomo.",
-        prezzoLabel: "€ 22",
+        prezzoLabel: "€ 23",
         Icona: Scissors,
+        popolare: true,
     },
     {
         id: "taglio-bimbo",
         nome: "Taglio Bimbo",
         categoria: "Bambino",
         descrizione: "Servizio di stilistica dedicato ai più piccoli.",
-        prezzoLabel: "€ 17",
+        prezzoLabel: "€ 18",
         Icona: Baby,
     },
     {
         id: "pieghe",
         nome: "Pieghe",
         categoria: "Donna",
-        descrizione: "Corta (€21), Media (€23), Lunga (€28), oppure Piega elaborata da 1 Ora (€35).",
-        prezzoLabel: "da € 21",
+        descrizione: "Corta (€22), Media (€24), Lunga (€27), oppure Piega elaborata da 1 Ora (€35).",
+        prezzoLabel: "da € 22",
         Icona: Wind,
     },
     {
         id: "acconciature",
         nome: "Acconciature",
         categoria: "Donna",
-        descrizione: "Semi raccolto e trecce (€20, piega esclusa) oppure Raccolto completo (da €50).",
+        descrizione: "Semi raccolto e trecce (€20, piega esclusa) oppure Raccolto completo (da €60).",
         prezzoLabel: "da € 20",
         Icona: Sparkles,
     },
@@ -63,9 +66,10 @@ export const SERVIZI: Servizio[] = [
         id: "colore-base",
         nome: "Colore & Decolorazione",
         categoria: "Colore",
-        descrizione: "Servizio di colorazione classica (da €40).",
-        prezzoLabel: "da € 40",
+        descrizione: "Servizio di colorazione classica (da €41).",
+        prezzoLabel: "da € 41",
         Icona: Palette,
+        popolare: true,
     },
     {
         id: "tonalizzante",
@@ -80,8 +84,9 @@ export const SERVIZI: Servizio[] = [
         nome: "Schiariture",
         categoria: "Colore",
         descrizione: "Tecniche di illuminazione: Balayage, Shatush e Colpi di sole.",
-        prezzoLabel: "da € 65",
+        prezzoLabel: "da € 67",
         Icona: Sun,
+        popolare: true,
     },
     {
         id: "tecnico-luxury",
@@ -111,8 +116,8 @@ export const SERVIZI: Servizio[] = [
         id: "servizi-sposa",
         nome: "Servizi Sposa",
         categoria: "Donna",
-        descrizione: "Raccolto Negozio/Domicilio (da €150/€400) e prova 1 ora (€50, piega inclusa).",
-        prezzoLabel: "da € 50",
+        descrizione: "Raccolto Negozio/Domicilio (da €150/€400) e prova 1h 30min (€100, piega inclusa).",
+        prezzoLabel: "da € 100",
         Icona: Sparkles,
     },
 ];
@@ -164,13 +169,14 @@ function ServizioCard({
         <div
             data-reveal="up"
             data-delay={delay}
-            className="
-        group relative flex flex-col gap-4 p-7
+            className={`
+        group relative flex-col gap-4 p-7
         bg-white border border-[#1a1a1a]/8 rounded-2xl
         hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:-translate-y-2 hover:border-[#1a1a1a]/15
         transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]
         overflow-hidden 
-      "
+        ${servizio.popolare ? "flex" : "hidden sm:flex"}
+      `}
         >
             {/* ── Shimmer sweep on hover ── */}
             <div
@@ -250,18 +256,16 @@ export default function ShowServizi() {
             ref={sectionRef}
             className="relative bg-[#f7f5f2] px-8 md:px-16 py-24 overflow-hidden"
         >
-            {/* Background decoration — cerchi sfumati animati */}
+            {/* Background decoration — cerchi sfumati statici (no animation: risparmia GPU) */}
             <div
                 aria-hidden="true"
-                className="pointer-events-none absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full
-          bg-gradient-radial from-rose-100/40 via-transparent to-transparent
-          animate-[pulse_8s_ease-in-out_infinite]"
+                className="pointer-events-none absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full opacity-60
+          bg-gradient-radial from-rose-100/40 via-transparent to-transparent"
             />
             <div
                 aria-hidden="true"
-                className="pointer-events-none absolute -bottom-20 -left-20 w-[400px] h-[400px] rounded-full
-          bg-gradient-radial from-violet-100/30 via-transparent to-transparent
-          animate-[pulse_10s_ease-in-out_infinite_2s]"
+                className="pointer-events-none absolute -bottom-20 -left-20 w-[400px] h-[400px] rounded-full opacity-50
+          bg-gradient-radial from-violet-100/30 via-transparent to-transparent"
             />
 
             <div className="relative max-w-7xl mx-auto">
@@ -299,9 +303,9 @@ export default function ShowServizi() {
                         data-reveal="up"
                         data-delay="300"
                         className="
-              group self-start md:self-auto
-              inline-flex items-center
-              pl-16 pr-8 py-3.5 rounded-full
+              group w-full md:w-auto self-start md:self-auto
+              flex items-center justify-center gap-3
+              px-8 py-3.5 rounded-full
               border border-[#1a1a1a]/20 hover:border-[#1a1a1a]
               text-sm font-semibold tracking-[0.1em] uppercase text-[#1a1a1a]
               overflow-hidden relative
@@ -317,9 +321,9 @@ export default function ShowServizi() {
 
                         {/* Pettine animato */}
                         <span className="
-              absolute left-5 text-[#1a1a1a]
+              relative text-[#1a1a1a] flex-shrink-0
               transition-all duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)]
-              group-hover:translate-x-44 group-hover:opacity-0 group-hover:text-white
+              group-hover:translate-x-8 group-hover:opacity-0 group-hover:text-white
             ">
                             {/* SVG Pettine personalizzato */}
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -335,9 +339,9 @@ export default function ShowServizi() {
                         {/* Testo del bottone che scivola al posto del pettine */}
                         <span className="
               relative transition-all duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)]
-              group-hover:text-white group-hover:-translate-x-4
+              group-hover:text-white group-hover:-translate-x-4 text-center whitespace-nowrap
             ">
-                            Vedi tutti i servizi
+                            Scopri tutti i servizi
                         </span>
                     </Link>
                 </div>

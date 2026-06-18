@@ -36,7 +36,7 @@ export default function ChiSiamoPage() {
     useScrollReveal(sectionRef);
 
     return (
-        <main ref={sectionRef} className="min-h-screen bg-[#f7f5f2] flex flex-col">
+        <main ref={sectionRef} className="min-h-[100dvh] bg-[#f7f5f2] flex flex-col">
 
             {/* ── HERO DARK SECTION ── */}
             <div className="bg-[#1a1a1a] pb-24 md:pb-36 relative overflow-hidden">
@@ -82,18 +82,18 @@ export default function ChiSiamoPage() {
                         </h2>
                         <div className="flex flex-col gap-6 text-[#1a1a1a]/70 text-lg md:text-xl leading-relaxed">
                             <p>
-                                Abbiamo costruito un luogo che rompe definitivamente con il filone "old school" o vintage. <strong>Manuel Concept Hair Lab</strong> è un vero e proprio atelier minimale, caratterizzato da linee architettoniche pulite e materiali essenziali.
+                                Abbiamo costruito un luogo che rompe definitivamente con il filone "old school". <strong>Manuel Concept Hair Lab</strong> è il salone di parrucchiere a Seregno, Monza e Brianza, caratterizzato da linee architettoniche pulite e materiali essenziali.
                             </p>
                             <p>
-                                Colori caldi, luci di precisione cromatica ed elementi materici si incontrano per creare una vera oasi di quiete. Il nostro spazio è studiato per disinnescare la frenesia del mondo esterno nel momento esatto in cui varchi la porta.
+                                Colori caldi, luci di precisione cromatica ed elementi materici si incontrano per creare una vera oasi di bellezza. Il nostro spazio è studiato per offrirti un'esperienza di relax totale durante i tuoi trattamenti capelli.
                             </p>
                         </div>
                     </div>
 
-                    <div 
-                        className="relative h-[450px] md:h-[650px] rounded-[2rem] overflow-hidden order-1 lg:order-2 isolate" 
+                    <div
+                        className="relative h-[450px] md:h-[650px] rounded-[2rem] overflow-hidden order-1 lg:order-2 isolate"
                         style={{ WebkitMaskImage: '-webkit-radial-gradient(white, black)', transform: 'translateZ(0)' }}
-                        data-reveal="clip" 
+                        data-reveal="clip"
                         data-delay="200"
                     >
                         <Image
@@ -102,16 +102,16 @@ export default function ChiSiamoPage() {
                             fill
                             className="object-cover scale-105 group-hover:scale-100 transition-transform duration-[2s]"
                         />
-                        <div className="absolute inset-0 bg-[#1a1a1a]/5 mix-blend-multiply pointer-events-none" />
+                        <div className="absolute inset-0 bg-[#1a1a1a]/10 pointer-events-none" />
                     </div>
                 </div>
 
                 {/* ── SEZIONE 2: IL TEAM ── */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
-                    <div 
-                        className="relative h-[450px] md:h-[650px] rounded-[2rem] overflow-hidden isolate" 
+                    <div
+                        className="relative h-[450px] md:h-[650px] rounded-[2rem] overflow-hidden isolate"
                         style={{ WebkitMaskImage: '-webkit-radial-gradient(white, black)', transform: 'translateZ(0)' }}
-                        data-reveal="clip" 
+                        data-reveal="clip"
                         data-delay="200"
                     >
                         <Image
@@ -120,7 +120,7 @@ export default function ChiSiamoPage() {
                             fill
                             className="object-cover scale-105 group-hover:scale-100 transition-transform duration-[2s]"
                         />
-                        <div className="absolute inset-0 bg-[#1a1a1a]/5 mix-blend-multiply pointer-events-none" />
+                        <div className="absolute inset-0 bg-[#1a1a1a]/10 pointer-events-none" />
                     </div>
 
                     <div className="flex flex-col gap-8" data-reveal="up" data-delay="0">
@@ -132,16 +132,16 @@ export default function ChiSiamoPage() {
                         </h2>
                         <div className="flex flex-col gap-6 text-[#1a1a1a]/70 text-lg md:text-xl leading-relaxed">
                             <p>
-                                Il nostro team è la vera essenza del Concept Lab. Professionisti dell'estetica, slegati dai soliti cliché e formati in alcune delle migliori accademie d'avanguardia europee.
+                                Il nostro team è la vera essenza del Concept Lab. Giovani hair stylist e coloristi, specialisti in taglio, styling e schiariture, costantemente aggiornati sulle ultime tendenze della moda.
                             </p>
                             <p>
-                                Lavoriamo come un vero e proprio collettivo editoriale. Nessuna imposizione di vecchi stili standardizzati: studiamo i trend visivi, la colorimetria e il volume per creare identità su misura, fresche, eleganti e sempre un passo avanti.
+                                Nessuno stile noioso o standard: studiamo costantemente i colori e i volumi per creare look unici, super fresh e di tendenza, rendendoci il punto di riferimento per chi cerca il miglior parrucchiere in Brianza.
                             </p>
                         </div>
 
                         <Link
                             href="/servizi"
-                            className="group flex flex-wrap items-center gap-4 w-fit mt-4 px-6 md:px-8 py-4 md:py-5 border border-[#1a1a1a]/15 hover:border-[#1a1a1a]/40 rounded-2xl bg-white/50 hover:bg-white transition-all duration-500 hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)]"
+                            className="group flex items-center justify-center md:justify-start gap-4 w-full md:w-fit mt-4 px-6 md:px-8 py-4 md:py-5 border border-[#1a1a1a]/15 hover:border-[#1a1a1a]/40 rounded-2xl bg-white/50 hover:bg-white transition-all duration-500 hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)]"
                         >
                             <span className="text-lg md:text-xl font-bold text-[#1a1a1a] tracking-tight">Scopri i nostri Servizi</span>
                             <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-[#f7f5f2] group-hover:bg-[#1a1a1a] border border-[#1a1a1a]/5 flex items-center justify-center transition-all duration-500 shrink-0 group-hover:-translate-y-1 group-hover:translate-x-1">
@@ -155,7 +155,7 @@ export default function ChiSiamoPage() {
 
             {/* ── CALL TO ACTION ESTERNA (CONTATTI) ── */}
             <div className="w-full max-w-[95%] mx-auto px-4 md:px-16 pb-20 md:pb-32">
-                <div data-reveal="up" className="relative w-full bg-[#1a1a1a] rounded-[2rem] p-10 md:p-20 overflow-hidden flex flex-col lg:flex-row items-start lg:items-center justify-between gap-12 group">
+                <div data-reveal="up" className="relative w-full bg-[#1a1a1a] rounded-[2rem] px-6 py-12 sm:p-12 md:p-20 overflow-hidden flex flex-col lg:flex-row items-start lg:items-center justify-between gap-10 md:gap-12 group">
                     <div className="absolute -top-[50%] -right-[10%] w-[500px] h-[500px] rounded-full pointer-events-none bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08)_0%,transparent_60%)] group-hover:opacity-100 opacity-70 transition-opacity duration-1000" />
 
                     <div className="flex flex-col gap-6 relative z-10 max-w-2xl">
@@ -171,7 +171,7 @@ export default function ChiSiamoPage() {
 
                     <Link
                         href="/contatti"
-                        className="relative z-10 group/btn flex items-center justify-center gap-4 md:gap-6 bg-white text-[#1a1a1a] px-6 md:px-10 py-4 md:py-6 rounded-full hover:bg-[#f7f5f2] hover:scale-105 hover:shadow-[0_8px_40px_rgba(255,255,255,0.15)] transition-all duration-500 whitespace-nowrap shrink-0 border border-white/20"
+                        className="relative z-10 group/btn flex w-full lg:w-auto items-center justify-center gap-4 md:gap-6 bg-white text-[#1a1a1a] px-6 md:px-10 py-4 md:py-6 rounded-full hover:bg-[#f7f5f2] hover:scale-105 hover:shadow-[0_8px_40px_rgba(255,255,255,0.15)] transition-all duration-500 whitespace-nowrap shrink-0 border border-white/20"
                     >
                         <span className="text-base md:text-xl font-bold tracking-tight">Come Raggiungerci</span>
                         <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-[#1a1a1a]/5 flex items-center justify-center group-hover/btn:bg-[#1a1a1a] group-hover/btn:text-white transition-colors duration-500">

@@ -37,7 +37,7 @@ export default function ContattiPage() {
     useScrollReveal(sectionRef);
 
     return (
-        <main ref={sectionRef} className="min-h-screen bg-[#f7f5f2] flex flex-col">
+        <main ref={sectionRef} className="min-h-[100dvh] bg-[#f7f5f2] flex flex-col">
 
             {/* ── HERO DARK SECTION (Header Scuro) ── */}
             {/* Si usa il nero per l'impatto editoriale iniziale e per accomodare i font bianchi della Navbar prima dello scroll */}
@@ -85,8 +85,8 @@ export default function ContattiPage() {
                         </div>
                         <div className="flex flex-col gap-5">
                             <p className="text-[#1a1a1a]/60 leading-relaxed text-lg">
-                                Preferiamo il sano e vecchio contatto umano.
-                                Niente code digitali: per fissare un appuntamento chiamaci direttamente in salone oppure inviaci una mail.
+                                Preferiamo il contatto diretto e senza filtri.
+                                Niente code digitali infinite: per fissare il tuo appuntamento nel nostro salone di parrucchiere a Seregno chiamaci, oppure scrivici al volo su WhatsApp.
                             </p>
 
                             <div className="flex flex-col gap-4 mt-2">
@@ -184,17 +184,18 @@ export default function ContattiPage() {
                     </div>
                 </div>
 
-                {/* 7 Colonne - Visual Luxury (Interactive Map) */}
-                <div className="lg:col-span-7" data-reveal="clip" data-delay="300">
+                {/* 7 Colonne - Mappa interattiva */}
+                <div className="lg:col-span-7 opacity-0 animate-[fadeIn_0.8s_0.3s_ease_forwards]">
                     <div className="relative w-full h-[500px] md:h-[700px] overflow-hidden rounded-[2rem] bg-[#1a1a1a] group">
 
-                        {/* Mappa in iframe con pointer-events-none per visualizzarla come foto estetica */}
+                        {/* Google Maps embed — più affidabile di OpenStreetMap per framing */}
                         <iframe
-                            src="https://www.openstreetmap.org/export/embed.html?bbox=9.195,45.6498,9.205,45.6538&layer=mapnik"
+                            src="https://maps.google.com/maps?q=Via+San+Vitale+114+Seregno+MB+Italia&t=&z=17&ie=UTF8&iwloc=&output=embed"
                             className="absolute -top-[100px] -left-[100px] w-[calc(100%+200px)] h-[calc(100%+200px)] max-w-none pointer-events-none border-none"
-                            style={{ filter: "grayscale(100%) contrast(1.15) brightness(0.95)" }}
-                            title="Mappa Seregno"
-                            loading="lazy"
+                            style={{ filter: "grayscale(100%) contrast(1.1) brightness(0.9)" }}
+                            title="Mappa Manuel Concept Hair Lab - Seregno"
+                            loading="eager"
+                            referrerPolicy="no-referrer-when-downgrade"
                         />
 
                         {/* Gradiente di fusione */}

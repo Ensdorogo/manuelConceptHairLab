@@ -12,11 +12,14 @@ const anonymousPro = Anonymous_Pro({
   variable: "--font-anonymous-pro",
   subsets: ["latin"],
   weight: "400",
+  display: "swap",
 });
 
 const syne = Syne({
   variable: "--font-syne",
   subsets: ["latin"],
+  display: "swap",
+  preload: true,
 });
 
 export const metadata: Metadata = {
@@ -122,15 +125,29 @@ export default async function RootLayout({
     <html
       lang="it"
       className={`${syne.variable} ${anonymousPro.variable} antialiased`}
+      style={{ backgroundColor: "#070707" }}
     >
       <head>
+        {/* Previene flash di sfondo bianco prima del caricamento JS/CSS */}
+        <meta name="theme-color" content="#070707" />
+        {/* Preconnect ai server Google Fonts per caricare i font più velocemente */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* Preload dell'immagine hero — elimina il flash "testo prima dello sfondo" */}
+        <link
+          rel="preload"
+          as="image"
+          href="/sfondo/sfondo1.webp"
+          type="image/webp"
+          fetchPriority="high"
+        />
         <Script
           src="https://cloud.umami.is/script.js"
           data-website-id="7cea288f-11ab-4b67-92e3-1a62c1948ed6"
           strategy="afterInteractive"
         />
       </head>
-      <body className="flex flex-col">
+      <body className="flex flex-col bg-[#070707]">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

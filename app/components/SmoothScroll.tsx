@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactLenis, useLenis } from "@studio-freight/react-lenis";
+import { ReactLenis, useLenis } from "lenis/react";
 import { ReactNode, useEffect } from "react";
 import { usePathname } from "next/navigation";
 
@@ -23,10 +23,10 @@ export default function SmoothScroll({ children }: { children: ReactNode }) {
         <ReactLenis
             root
             options={{
-                lerp: 0.08,     // Valore basso = scorrimento più inerziale/fluido
-                duration: 1.2,  // Durata dello scorrimento dinamico
+                lerp: 0.15,         // Più reattivo — minor ritardo percepito
+                duration: 1.0,      // Animazione più snella
                 smoothWheel: true,
-                wheelMultiplier: 1.2,
+                wheelMultiplier: 0.85,
             }}
         >
             <RouteProvider>

@@ -9,16 +9,15 @@ export default function CustomCursor() {
     const [cursorText, setCursorText] = useState<string | null>(null);
 
     useEffect(() => {
-        // Disabilitiamo il custom cursor su dispositivi touch
-        if (typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches) {
-            return;
-        }
+        if (typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches) return;
 
         let mouseX = window.innerWidth / 2;
         let mouseY = window.innerHeight / 2;
-        let ringX = window.innerWidth / 2;
-        let ringY = window.innerHeight / 2;
-        
+        let ringX = mouseX;
+        let ringY = mouseY;
+        let prevRX = ringX;
+        let prevRY = ringY;
+
         let hoverState = false;
         let currentText: string | null = null;
 
@@ -26,93 +25,128 @@ export default function CustomCursor() {
             mouseX = e.clientX;
             mouseY = e.clientY;
 
-            // Rileva se stiamo passando sopra elementi interattivi (link o bottoni)
             const target = e.target as HTMLElement;
-            const hoverableEl = target.closest("a, button, input, [role='button'], [data-hoverable='true']");
-            const isTargetHoverable = !!hoverableEl;
-            
-            if (isTargetHoverable !== hoverState) {
-                hoverState = isTargetHoverable;
-                setIsHovering(isTargetHoverable);
+            const hoverable = target.closest("a, button, input, [role='button'], [data-hoverable='true']");
+            const nowHovering = !!hoverable;
+
+            if (nowHovering !== hoverState) {
+                hoverState = nowHovering;
+                setIsHovering(nowHovering);
             }
 
-            const text = hoverableEl ? hoverableEl.getAttribute('data-cursor-text') : null;
+            const text = hoverable?.getAttribute("data-cursor-text") ?? null;
             if (text !== currentText) {
                 currentText = text;
                 setCursorText(text);
             }
         };
 
-        let requestRef: number;
+        let rafId: number;
 
         const render = () => {
-            // Lerp fluido per l'anello esterno (delay visivo del mouse)
-            ringX += (mouseX - ringX) * 0.15;
-            ringY += (mouseY - ringY) * 0.15;
+            // Lerp dell'anello
+            ringX += (mouseX - ringX) * 0.14;
+            ringY += (mouseY - ringY) * 0.14;
 
-            // Applicazione dei trasform tramite manipolazione diretta per non impattare le prestazioni di React
             if (dotRef.current) {
-                dotRef.current.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
+                dotRef.current.style.transform = `translate3d(${mouseX}px,${mouseY}px,0)`;
             }
-            if (ringRef.current) {
-                ringRef.current.style.transform = `translate3d(${ringX}px, ${ringY}px, 0)`;
+            if (ringRef.current && (Math.abs(ringX - prevRX) > 0.05 || Math.abs(ringY - prevRY) > 0.05)) {
+                ringRef.current.style.transform = `translate3d(${ringX}px,${ringY}px,0)`;
+                prevRX = ringX;
+                prevRY = ringY;
             }
 
-            requestRef = requestAnimationFrame(render);
+            rafId = requestAnimationFrame(render);
         };
 
         window.addEventListener("mousemove", onMouseMove, { passive: true });
-        requestRef = requestAnimationFrame(render);
+        rafId = requestAnimationFrame(render);
 
         return () => {
             window.removeEventListener("mousemove", onMouseMove);
-            cancelAnimationFrame(requestRef);
+            cancelAnimationFrame(rafId);
         };
     }, []);
 
-    // Rendering standard che previene incomprensioni SSR tra server e telefono
     return (
         <div className="custom-cursor-container">
-            {/* L'anello esterno (Outer wrapper per posizionamento manuale) */}
+
+            {/*
+             * ANELLO ESTERNO
+             * Tecnica "doppio bordo":
+             *   border bianco  → visibile su sfondi scuri
+             *   box-shadow nera → visibile su sfondi chiari
+             * Nessun mix-blend-difference → nessun GPU readback.
+             */}
             <div
                 ref={ringRef}
-                className="fixed top-0 left-0 pointer-events-none z-[99998] mix-blend-difference flex items-center justify-center"
+                className="fixed top-0 left-0 pointer-events-none z-[99998]"
                 style={{ willChange: "transform" }}
             >
-                {/* Elemento estetico per hover */}
-                <div 
-                    className={`
-                        w-16 h-16 -mt-8 -ml-8 rounded-full transition-all duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)] flex items-center justify-center
-                        ${cursorText 
-                            ? 'bg-white opacity-100 scale-[1.3]' 
-                            : isHovering 
-                                ? 'bg-white opacity-20 scale-[1.2]' 
-                                : 'border-[1.5px] border-white bg-transparent opacity-100 scale-50'
-                        }
-                    `}
+                <div
+                    style={{
+                        width: "80px",
+                        height: "80px",
+                        marginTop: "-40px",
+                        marginLeft: "-40px",
+                        borderRadius: "50%",
+                        transition: "transform 400ms cubic-bezier(0.22,1,0.36,1), background 300ms ease, box-shadow 300ms ease, opacity 300ms ease",
+                        ...(cursorText ? {
+                            // Stato testo: pallina nera piena con testo bianco
+                            background: "#1a1a1a",
+                            boxShadow: "0 0 0 1.5px rgba(255,255,255,0.5), 0 4px 20px rgba(0,0,0,0.3)",
+                            transform: "scale(1.8)",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                        } : isHovering ? {
+                            // Stato hover: anello espanso, semi-trasparente scuro
+                            background: "rgba(26,26,26,0.08)",
+                            boxShadow: "inset 0 0 0 1.5px rgba(26,26,26,0.55), 0 0 0 1px rgba(255,255,255,0.35), 0 2px 12px rgba(0,0,0,0.12)",
+                            transform: "scale(1.25)",
+                        } : {
+                            // Stato default: anello piccolo, doppio bordo bianco+nero
+                            background: "transparent",
+                            boxShadow: "inset 0 0 0 1.5px rgba(255,255,255,0.85), 0 0 0 1.5px rgba(0,0,0,0.45), 0 2px 8px rgba(0,0,0,0.15)",
+                            transform: "scale(0.5)",
+                        }),
+                    }}
                 >
                     {cursorText && (
-                        <span className="text-[10px] uppercase tracking-widest font-bold text-black anony">
+                        <span style={{ fontSize: "9px", letterSpacing: "0.15em", textTransform: "uppercase", fontWeight: 700, color: "white", whiteSpace: "nowrap" }}>
                             {cursorText}
                         </span>
                     )}
                 </div>
             </div>
 
-            {/* Il puntino interno ultra-istante (Outer wrapper) */}
+            {/*
+             * PUNTINO INTERNO
+             * Stesso schema: fill bianco + shadow nera esterna.
+             */}
             <div
                 ref={dotRef}
-                className="fixed top-0 left-0 pointer-events-none z-[99999] mix-blend-difference"
+                className="fixed top-0 left-0 pointer-events-none z-[99999]"
                 style={{ willChange: "transform" }}
             >
-                {/* Elemento estetico puntino */}
-                <div 
-                    className={`
-                        w-2 h-2 -mt-1 -ml-1 rounded-full bg-white transition-all duration-300 ease-out
-                        ${isHovering ? 'opacity-0 scale-0' : 'opacity-100 scale-100'}
-                    `}
+                <div
+                    style={{
+                        width: "6px",
+                        height: "6px",
+                        marginTop: "-3px",
+                        marginLeft: "-3px",
+                        borderRadius: "50%",
+                        background: "white",
+                        // Bordo scuro esterno = visibile su sfondo bianco
+                        boxShadow: "0 0 0 1.5px rgba(0,0,0,0.5), 0 1px 4px rgba(0,0,0,0.3)",
+                        transition: "opacity 250ms ease, transform 250ms ease",
+                        opacity: isHovering ? 0 : 1,
+                        transform: isHovering ? "scale(0)" : "scale(1)",
+                    }}
                 />
             </div>
+
         </div>
     );
 }

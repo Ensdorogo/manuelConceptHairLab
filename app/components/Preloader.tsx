@@ -1,53 +1,61 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Great_Vibes } from "next/font/google";
 
 const greatVibes = Great_Vibes({
   weight: "400",
   subsets: ["latin"],
+  display: "swap",
 });
 
 export default function Preloader() {
+  // Solo 2 stati React: se mostrare il preloader e se sta uscendo
+  // Il progresso NON usa React state — aggiornato via rAF direttamente sul DOM
   const [isLoading, setIsLoading] = useState(true);
-  const [progress, setProgress] = useState(0);
   const [showPreloader, setShowPreloader] = useState(true);
 
+  const progressBarRef  = useRef<HTMLDivElement>(null);
+  const progressTextRef = useRef<HTMLSpanElement>(null);
+
   useEffect(() => {
-    // Blocca lo scroll del body
     document.body.style.overflow = "hidden";
     document.body.classList.add("preloader-active");
 
-    const progressInterval = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(progressInterval);
-          return 100;
-        }
-        return prev + 1;
-      });
-    }, 25);
+    const DURATION = 3800;
+    const start = performance.now();
+    let rafId: number;
+
+    // requestAnimationFrame invece di setInterval: 0 re-render React,
+    // animazione smooth a 60fps, sincronizzata col display refresh rate
+    const tick = (now: number) => {
+      const elapsed  = now - start;
+      const pct      = Math.min(100, Math.floor((elapsed / DURATION) * 100));
+
+      if (progressBarRef.current)  progressBarRef.current.style.width      = `${pct}%`;
+      if (progressTextRef.current) progressTextRef.current.textContent      = `${pct}%`;
+
+      if (pct < 100) rafId = requestAnimationFrame(tick);
+    };
+
+    rafId = requestAnimationFrame(tick);
 
     const timeout = setTimeout(() => {
+      cancelAnimationFrame(rafId);
       setIsLoading(false);
-
-      // SALVIAMO IL COOKIE INVECE DEL SESSION STORAGE
-      // Omettendo la data di scadenza (expires), questo diventa un "Session Cookie"
-      // che si cancellerà automaticamente quando l'utente chiude il browser.
       document.cookie = "hasSeenPreloader=true; path=/";
-
       document.body.style.overflow = "unset";
 
       setTimeout(() => {
         setShowPreloader(false);
         document.body.classList.remove("preloader-active");
-      }, 500);
-    }, 3800);
+      }, 1000);
+    }, DURATION);
 
     return () => {
       clearTimeout(timeout);
-      clearInterval(progressInterval);
+      cancelAnimationFrame(rafId);
       document.body.style.overflow = "unset";
       document.body.classList.remove("preloader-active");
     };
@@ -65,11 +73,8 @@ export default function Preloader() {
           transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
           className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#070707]"
         >
-          {/* Subtile Glow Radiale */}
+          {/* Glow radiale */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50vw] h-[50vw] rounded-full pointer-events-none bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.03)_0%,transparent_60%)]" />
-
-          {/* Sfondo noise */}
-          <div className="absolute inset-0 opacity-[0.02] bg-[url(/noise.png)] bg-repeat pointer-events-none mix-blend-overlay" />
 
           {/* Contenitore Centrale */}
           <div className="relative flex flex-col items-center z-10">
@@ -88,15 +93,8 @@ export default function Preloader() {
                 stroke="white"
                 strokeWidth="1.5"
                 fill="white"
-                initial={{
-                  strokeDasharray: 500,
-                  strokeDashoffset: 500,
-                  fillOpacity: 0,
-                }}
-                animate={{
-                  strokeDashoffset: 0,
-                  fillOpacity: 1,
-                }}
+                initial={{ strokeDasharray: 500, strokeDashoffset: 500, fillOpacity: 0 }}
+                animate={{ strokeDashoffset: 0, fillOpacity: 1 }}
                 transition={{
                   strokeDashoffset: { duration: 2.5, ease: "easeInOut" },
                   fillOpacity: { duration: 1.2, ease: "easeOut", delay: 1.8 },
@@ -116,7 +114,7 @@ export default function Preloader() {
             </motion.div>
           </div>
 
-          {/* UI di Caricamento */}
+          {/* UI di Caricamento — testo progresso via ref, nessun re-render */}
           <div className="absolute bottom-8 sm:bottom-12 w-full flex justify-between items-center px-8 sm:px-16 z-20">
             <motion.div
               initial={{ opacity: 0 }}
@@ -135,17 +133,21 @@ export default function Preloader() {
               className="flex flex-col items-end"
             >
               <span className="anony text-[10px] tracking-[0.2em] text-white/30 uppercase">Loading</span>
-              <span className="anony text-xs sm:text-sm tracking-widest text-white mt-1 w-[4ch] text-right">
-                {progress}%
+              {/* Nessun {progress}% in JSX — aggiornato direttamente via ref */}
+              <span
+                ref={progressTextRef}
+                className="anony text-xs sm:text-sm tracking-widest text-white mt-1 w-[4ch] text-right"
+              >
+                0%
               </span>
             </motion.div>
           </div>
 
-          {/* Barra di progresso */}
-          <motion.div
+          {/* Barra di progresso — larghezza aggiornata via ref, 0 re-render */}
+          <div
+            ref={progressBarRef}
             className="absolute bottom-0 left-0 h-[1px] bg-white/20 z-20"
-            style={{ width: `${progress}%` }}
-            transition={{ ease: "linear" }}
+            style={{ width: "0%" }}
           />
         </motion.div>
       )}
