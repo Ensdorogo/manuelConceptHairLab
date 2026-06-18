@@ -27,39 +27,47 @@ export default function Preloader() {
     const start = performance.now();
     let rafId: number;
 
-    // requestAnimationFrame invece di setInterval: 0 re-render React,
-    // animazione smooth a 60fps, sincronizzata col display refresh rate
     const tick = (now: number) => {
       const elapsed  = now - start;
       const pct      = Math.min(100, Math.floor((elapsed / DURATION) * 100));
 
-      if (progressBarRef.current)  progressBarRef.current.style.width      = `${pct}%`;
-      if (progressTextRef.current) progressTextRef.current.textContent      = `${pct}%`;
+      if (progressBarRef.current)  progressBarRef.current.style.width = `${pct}%`;
+      if (progressTextRef.current) progressTextRef.current.textContent = `${pct}%`;
 
       if (pct < 100) rafId = requestAnimationFrame(tick);
     };
 
     rafId = requestAnimationFrame(tick);
 
-    const timeout = setTimeout(() => {
+    const finish = () => {
       cancelAnimationFrame(rafId);
+      clearTimeout(timeout);
+      clearTimeout(hardFallback);
       setIsLoading(false);
-      document.cookie = "hasSeenPreloader=true; path=/";
+      try { document.cookie = "hasSeenPreloader=true; path=/"; } catch (_) {}
       document.body.style.overflow = "unset";
 
       setTimeout(() => {
         setShowPreloader(false);
         document.body.classList.remove("preloader-active");
       }, 1000);
-    }, DURATION);
+    };
+
+    const timeout = setTimeout(finish, DURATION);
+
+    // Fallback di sicurezza: se rAF si blocca (tab in background su mobile),
+    // chiudiamo comunque il preloader dopo DURATION + 600ms
+    const hardFallback = setTimeout(finish, DURATION + 600);
 
     return () => {
       clearTimeout(timeout);
+      clearTimeout(hardFallback);
       cancelAnimationFrame(rafId);
       document.body.style.overflow = "unset";
       document.body.classList.remove("preloader-active");
     };
   }, []);
+
 
   if (!showPreloader) return null;
 

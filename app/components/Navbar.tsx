@@ -60,7 +60,7 @@ export default function Navbar() {
     return (
         <>
             {/* Div invisibile come placeholder per non rompere il layout del resto della pagina quando la navbar vera è fixed */}
-            <div className="h-[96px] w-full invisible pointer-events-none" aria-hidden="true" />
+            <div className="h-[72px] sm:h-[96px] w-full invisible pointer-events-none" aria-hidden="true" />
 
             {/* Header fisso con effetto "glass" allo scroll */}
             <header

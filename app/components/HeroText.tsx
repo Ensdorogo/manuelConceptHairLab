@@ -58,14 +58,14 @@ export default function HeroText() {
     });
 
     return (
-        <div className="pb-16 text-white w-[95%] mx-auto">
+        <div className="pb-10 sm:pb-16 text-white w-[90%] sm:w-[95%] mx-auto">
 
             {/* Eyebrow */}
             <div
-                className="flex items-center gap-3 mb-5"
+                className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-5"
                 style={anim(0, 0.6)}
             >
-                <p className="text-xs tracking-[0.25em] uppercase">
+                <p className="text-[10px] sm:text-xs tracking-[0.2em] sm:tracking-[0.25em] uppercase">
                     Seregno · Est. 2018
                 </p>
                 {mounted && (
@@ -81,7 +81,7 @@ export default function HeroText() {
 
             {/* H1 */}
             <h1
-                className="text-[clamp(2.8rem,5.5vw,5rem)] font-bold leading-[0.9] tracking-tight mb-6"
+                className="text-[clamp(2rem,8vw,5rem)] font-bold leading-[0.9] tracking-tight mb-5 sm:mb-6"
                 style={anim(80)}
             >
                 L&apos;arte<br />
@@ -91,7 +91,7 @@ export default function HeroText() {
 
             {/* Subtitle — opacity 0.7 nel visible, 0 nel hidden: nessun conflitto */}
             <p
-                className="text-base font-light leading-relaxed mb-10 max-w-lg"
+                className="text-sm sm:text-base font-light leading-relaxed mb-7 sm:mb-10 max-w-lg"
                 style={anim(160, 0.7)}
             >
                 Il salone di parrucchiere a Seregno dove ogni dettaglio conta.<br />
@@ -101,7 +101,7 @@ export default function HeroText() {
 
             {/* CTA buttons */}
             <div
-                className="flex items-center gap-4 flex-wrap"
+                className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4"
                 style={anim(240)}
             >
                 {/* Primary — Prenota ora */}
@@ -111,10 +111,10 @@ export default function HeroText() {
                     rel="noopener noreferrer"
                     className="
                         group relative inline-flex items-center
-                        px-8 py-4 rounded-full
+                        px-6 sm:px-8 py-3.5 sm:py-4 rounded-full
                         bg-white hover:bg-white/90
                         text-sm font-semibold tracking-[0.12em] uppercase text-black
-                        overflow-hidden min-w-[220px] justify-center
+                        overflow-hidden w-full sm:w-auto sm:min-w-[220px] justify-center
                         shadow-[0_4px_24px_rgba(0,0,0,0.3)]
                         transition-all duration-300
                     "
@@ -139,7 +139,7 @@ export default function HeroText() {
                     href="/servizi"
                     className="
                         group relative inline-flex items-center gap-2
-                        px-8 py-4 rounded-full
+                        px-6 sm:px-8 py-3.5 sm:py-4 rounded-full
                         border border-white
                         bg-white/10 hover:bg-white/20
                         backdrop-blur-sm
@@ -147,6 +147,7 @@ export default function HeroText() {
                         text-white
                         transition-all duration-300
                         shadow-[0_4px_24px_rgba(0,0,0,0.2)]
+                        w-full sm:w-auto justify-center
                     "
                 >
                     <span className="relative">Scopri i servizi</span>
